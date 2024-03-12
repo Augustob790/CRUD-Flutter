@@ -141,13 +141,7 @@ class _NoteListScreenState extends State<NoteListScreen> {
           _contentController.clear();
           showDialog(
             context: context,
-            builder: (context) => AlertDialog(
-            backgroundColor: const Color.fromRGBO(46, 44, 52, 0),
-            content: SizedBox(
-                        width: double.maxFinite, // 
-                        child: PopUpOpinions(),
-            )
-          ));
+            builder: (context) => PopUpOpinions());
         },
         child: const Icon(Icons.add),
       ),
