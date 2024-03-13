@@ -1,4 +1,4 @@
-class Note {
+class Period {
   int? id;
   String title;
   String category;
@@ -7,7 +7,7 @@ class Note {
   String meta1;
   String meta2;
 
-  Note({
+  Period({
     this.id,
     required this.title,
     required this.category,
@@ -29,8 +29,8 @@ class Note {
     };
   }
 
-  static Note fromMap(Map<String, dynamic> map) {
-    return Note(
+  static Period fromMap(Map<String, dynamic> map) {
+    return Period(
       id: map['id'],
       title: map['title'],
       category: map['category'],

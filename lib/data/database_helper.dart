@@ -1,3 +1,4 @@
+// ignore_for_file: depend_on_referenced_packages
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
@@ -35,35 +36,5 @@ class DB {
     });
   }
 
-  // Future<int> insert(Note note) async {
-  //   final db = await database;
-  //   return await db!.insert(tableName, note.toMap());
-  // }
 
-  // Future<List<Note>> getAllNotes() async {
-  //   final db = await database;
-  //   final List<Map<String, dynamic>> maps = await db!.query(tableName);
-  //   return List.generate(maps.length, (i) {
-  //     return Note.fromMap(maps[i]);
-  //   });
-  // }
-
-  // Future<int> update(Note note) async {
-  //   final db = await database;
-  //   return await db!.update(
-  //     tableName,
-  //     note.toMap(),
-  //     where: 'id = ?',
-  //     whereArgs: [note.id],
-  //   );
-  // }
-
-  // Future<int> delete(int id) async {
-  //   final db = await database;
-  //   return await db!.delete(
-  //     tableName,
-  //     where: 'id = ?',
-  //     whereArgs: [id],
-  //   );
-  // }
 }

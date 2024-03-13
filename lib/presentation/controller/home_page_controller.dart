@@ -5,7 +5,6 @@ import '../../model/note.dart';
 
 class HomePageController extends ChangeNotifier {
   final TextEditingController titleController = TextEditingController();
-  final TextEditingController contentController = TextEditingController();
   final TextEditingController meta1 = TextEditingController();
   final TextEditingController meta2 = TextEditingController();
   late Database db;
@@ -22,7 +21,7 @@ class HomePageController extends ChangeNotifier {
     'Categoria 5',
     'Categoria 6',
   ];
-  List<Note> notes = [];
+  List<Period> notes = [];
 
   onSelectedEstado(String estadoName) {
     dropdownStateValue = estadoName;
@@ -39,9 +38,9 @@ class HomePageController extends ChangeNotifier {
     notifyListeners();
   }
 
-  insert(Note note) async {
+  insert(Period period) async {
     final db = await DB.instance.database;
-    await db!.insert(tableName, note.toMap());
+    await db!.insert(tableName, period.toMap());
     notifyListeners();
   }
 
@@ -49,18 +48,18 @@ class HomePageController extends ChangeNotifier {
     final db = await DB.instance.database;
     final List<Map<String, dynamic>> maps = await db!.query(tableName);
     notes = List.generate(maps.length, (i) {
-      return Note.fromMap(maps[i]);
+      return Period.fromMap(maps[i]);
     });
     notifyListeners();
   }
 
-  update(Note note) async {
+  update(Period period) async {
     final db = await DB.instance.database;
     db!.update(
       tableName,
-      note.toMap(),
+      period.toMap(),
       where: 'id = ?',
-      whereArgs: [note.id],
+      whereArgs: [period.id],
     );
     notifyListeners();
   }
