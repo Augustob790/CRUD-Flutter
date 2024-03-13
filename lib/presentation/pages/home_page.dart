@@ -40,7 +40,7 @@ class _NoteListScreenState extends State<NoteListScreen> {
         title: const Manrope(
           text: "Configurações",
           color: Color.fromARGB(255, 12, 11, 11),
-          font: FontWeight.w400,
+          font: FontWeight.w500,
           size: 22,
         ),
         leading: IconButton(
