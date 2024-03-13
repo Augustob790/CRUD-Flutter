@@ -52,7 +52,7 @@ class _EditNewPeriodState extends State<EditNewPeriod> {
                           Padding(
                             padding: const EdgeInsets.only(left: 40.0),
                             child: const Text(
-                              "Nova Período",
+                              "Novo Período",
                               style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w500,
