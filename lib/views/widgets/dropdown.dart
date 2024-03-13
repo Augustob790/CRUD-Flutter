@@ -15,8 +15,8 @@ class DropdownButtonForm extends StatelessWidget {
     return DropdownButtonFormField<String>(
       validator: validator,
       icon: const Icon(
-        Icons.arrow_downward,
-        color: Color.fromARGB(0, 255, 193, 7),
+        Icons.arrow_drop_down,
+        color: Colors.black,
       ),
       decoration: const InputDecoration(border: InputBorder.none),
       value: initialValue ?? value,
@@ -26,9 +26,9 @@ class DropdownButtonForm extends StatelessWidget {
           value: value,
           child: Manrope(
             text: value,
-            color: const Color.fromARGB(255, 113, 113, 113),
-            font: FontWeight.w500,
-            size: 15,
+            color: Colors.black,
+            font: FontWeight.w400,
+            size: 13,
           ),
         );
       }).toList(),

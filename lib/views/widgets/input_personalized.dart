@@ -47,13 +47,13 @@ class InputPersonalized extends StatelessWidget {
       height: height,
       width: width,
       decoration: BoxDecoration(
-        color: const Color.fromARGB(112, 227, 225, 225),
+        color: const Color.fromARGB(14, 167, 167, 167),
         border: Border.all(
-            color: const Color.fromARGB(51, 205, 205, 205), width: 2),
+            color: const Color.fromARGB(159, 205, 205, 205), width: 1),
         borderRadius: borderRadius,
       ),
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+        padding: const EdgeInsets.all(10),
         child: Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -73,8 +73,9 @@ class InputPersonalized extends StatelessWidget {
                   controller: controller,
                   style: const TextStyle(
                       fontFamily: 'Nunito',
-                      color: Color.fromARGB(255, 113, 113, 113),
-                      fontSize: 15),
+                      color: Color.fromARGB(255, 8, 1, 1),
+                      fontWeight: FontWeight.w400,
+                      fontSize: 14),
                   inputFormatters: inputFormatters,
                   onEditingComplete: onEditingComplete,
                   decoration: InputDecoration(

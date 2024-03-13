@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:teste_pleno/views/widgets/info_modal.dart';
+import '../../const/image_const.dart';
 import '../../model/note.dart';
 import '../../views/widgets/add_modal.dart';
 import '../../views/widgets/custom_button.dart';
@@ -99,14 +100,13 @@ class _NoteListScreenState extends State<NoteListScreen> {
                             const BorderRadius.all(Radius.circular(10)),
                       ),
                       child: Row(
-                        children: const [
+                        children: [
                           Padding(
                             padding: EdgeInsets.only(
                                 top: 5.0, bottom: 5.0, left: 5.0),
                             child: CircleAvatar(
-                              radius: 30,
-                              backgroundImage: NetworkImage(
-                                  'https://exemplo.com/sua/imagem.jpg'),
+                            radius: 30,
+                             backgroundImage: AssetImage(ImageConstant.imageNotFound),
                             ),
                           ),
                           Manrope(
@@ -285,21 +285,20 @@ class _NoteListScreenState extends State<NoteListScreen> {
                   ),
                 ),
                 Row(
-                  children: const [
+                  children:  [
                     Padding(
                       padding: EdgeInsets.all(10.0),
                       child: CircleAvatar(
                         radius: 40,
-                        backgroundImage:
-                            NetworkImage('https://exemplo.com/sua/imagem.jpg'),
+                        backgroundImage: AssetImage(ImageConstant.imageNotFound),
                       ),
                     ),
                     Column(
-                      children: [
+                      children: const [
                         Manrope(
                           text: "João",
-                          color: Color.fromARGB(255, 33, 8, 227),
-                          font: FontWeight.w500,
+                          color: Color.fromARGB(247, 15, 40, 139),
+                          font: FontWeight.w600,
                           size: 18,
                         ),
                         Padding(
@@ -307,8 +306,8 @@ class _NoteListScreenState extends State<NoteListScreen> {
                           child: Manrope(
                             decoration: TextDecoration.underline,
                             text: "Sair",
-                            color: Color.fromARGB(255, 33, 8, 227),
-                            font: FontWeight.w500,
+                            color: Color.fromARGB(247, 15, 40, 139),
+                            font: FontWeight.w600,
                             size: 15,
                           ),
                         ),

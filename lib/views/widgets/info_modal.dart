@@ -74,7 +74,7 @@ class _InfoPeriodState extends State<InfoPeriod> {
                                 },
                                 child: Manrope(
                                   text: "X",
-                                  size: 15,
+                                  size: 20,
                                   color: const Color.fromARGB(255, 188, 188, 188),
                                 )),
                           )
@@ -88,8 +88,8 @@ class _InfoPeriodState extends State<InfoPeriod> {
                             validator: null,
                             controller: widget.controller.titleController,
                             obscure: false,
-                            height: 40,
-                            width: (size.width / 1.78),
+                            height: 45,
+                            width: (size.width / 1.74),
                           ),
                         ],
                       ),
@@ -107,7 +107,7 @@ class _InfoPeriodState extends State<InfoPeriod> {
                                   const Manrope(
                                     text: "Começa",
                                     color: Color.fromARGB(255, 12, 11, 11),
-                                    font: FontWeight.w600,
+                                    font: FontWeight.w500,
                                     size: 14,
                                   ),
                                   const SizedBox(width: 5),
@@ -133,7 +133,7 @@ class _InfoPeriodState extends State<InfoPeriod> {
                                   const Manrope(
                                     text: "Termina",
                                     color: Color.fromARGB(255, 12, 11, 11),
-                                    font: FontWeight.w600,
+                                    font: FontWeight.w500,
                                     size: 14,
                                   ),
                                   const SizedBox(width: 5),
@@ -159,7 +159,7 @@ class _InfoPeriodState extends State<InfoPeriod> {
                                   const Manrope(
                                     text: "Categoria",
                                     color: Color.fromARGB(255, 12, 11, 11),
-                                    font: FontWeight.w600,
+                                    font: FontWeight.w500,
                                     size: 14,
                                   ),
                                   const SizedBox(width: 5),
@@ -179,7 +179,7 @@ class _InfoPeriodState extends State<InfoPeriod> {
                                 const Manrope(
                                   text: "Meta 1",
                                   color: Color.fromARGB(255, 12, 11, 11),
-                                  font: FontWeight.w600,
+                                  font: FontWeight.w500,
                                   size: 14,
                                 ),
                                 const SizedBox(width: 5),
