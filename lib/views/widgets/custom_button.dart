@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:teste_pleno/views/widgets/manrope.dart';
 
@@ -10,7 +12,8 @@ class CustomButtonStandard extends StatelessWidget {
       required this.height,
       required this.width,
       this.color = Colors.orangeAccent,
-      this.margin});
+      this.margin,
+      this.size = 18.0,});
 
   final Function() onTap;
   final String text;
@@ -19,6 +22,7 @@ class CustomButtonStandard extends StatelessWidget {
   final double width;
   final EdgeInsetsGeometry? margin;
   final Color? color;
+  final double? size;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +42,7 @@ class CustomButtonStandard extends StatelessWidget {
                   text: text,
                   color: Colors.white,
                   font: FontWeight.w500,
-                  size: 18,
+                  size: size,
                 )
               : Container(
                   height: height,
