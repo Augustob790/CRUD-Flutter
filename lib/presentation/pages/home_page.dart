@@ -43,14 +43,10 @@ class _NoteListScreenState extends State<NoteListScreen> {
           font: FontWeight.w400,
           size: 22,
         ),
-        leading: TextButton(
+        leading: IconButton(
+        icon: Icon(Icons.arrow_back_ios),
           onPressed: () {},
-          child: Manrope(
-            text: "<",
-            color: Color.fromARGB(255, 12, 11, 11),
-            font: FontWeight.w400,
-            size: 25,
-          ),
+
         ),
       ),
       body: SingleChildScrollView(
@@ -92,7 +88,7 @@ class _NoteListScreenState extends State<NoteListScreen> {
                       height: 60,
                       width: 160,
                       decoration: BoxDecoration(
-                        color: Color.fromARGB(172, 236, 236, 237),
+                        color: Color.fromARGB(140, 197, 197, 197),
                         border: Border.all(
                             color: Color.fromARGB(255, 251, 248, 248),
                             width: 2),
@@ -102,8 +98,7 @@ class _NoteListScreenState extends State<NoteListScreen> {
                       child: Row(
                         children: [
                           Padding(
-                            padding: EdgeInsets.only(
-                                top: 5.0, bottom: 5.0, left: 5.0),
+                            padding: EdgeInsets.only(top: 5.0, bottom: 5.0, left: 5.0),
                             child: CircleAvatar(
                             radius: 30,
                              backgroundImage: AssetImage(ImageConstant.imageNotFound),
