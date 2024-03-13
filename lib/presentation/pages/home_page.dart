@@ -2,10 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:teste_pleno/views/widgets/edit_modal.dart';
+import 'package:teste_pleno/views/widgets/info_modal.dart';
 import '../../model/note.dart';
 import '../../views/widgets/add_modal.dart';
 import '../../views/widgets/custom_button.dart';
+import '../../views/widgets/edit_modal.dart';
 import '../../views/widgets/manrope.dart';
 import '../../views/widgets/mask.dart';
 import '../controller/home_page_controller.dart';
@@ -32,7 +33,9 @@ class _NoteListScreenState extends State<NoteListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+    backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Colors.white,
         title: const Manrope(
           text: "Configurações",
           color: Color.fromARGB(255, 12, 11, 11),
@@ -49,14 +52,13 @@ class _NoteListScreenState extends State<NoteListScreen> {
           ),
         ),
       ),
-      body: Consumer<HomePageController>(builder: (context, controller, child) {
-        return Padding(
+      body: SingleChildScrollView(
+        child: Padding(
           padding: const EdgeInsets.all(10.0),
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
+          child: Consumer<HomePageController>(builder: (context, controller, child) {
+            return Column(
+              children: [
+                Row(
                   children: [
                     Column(
                       children: [
@@ -118,28 +120,27 @@ class _NoteListScreenState extends State<NoteListScreen> {
                     ),
                   ],
                 ),
-              ),
-              const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Divider(height: 15),
-              ),
-              Row(
-                children: const [
-                  Padding(
-                    padding: EdgeInsets.only(left: 8.0, bottom: 10),
-                    child: Manrope(
-                      text: "Períodos",
-                      color: Color.fromARGB(255, 12, 11, 11),
-                      font: FontWeight.w500,
-                      size: 18,
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Divider(height: 15),
+                ),
+                Row(
+                  children: const [
+                    Padding(
+                      padding: EdgeInsets.only(left: 8.0, bottom: 10),
+                      child: Manrope(
+                        text: "Períodos",
+                        color: Color.fromARGB(255, 12, 11, 11),
+                        font: FontWeight.w500,
+                        size: 18,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              Expanded(
-                child: Padding(
+                  ],
+                ),
+                Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
+                  height: 300,
                     padding: EdgeInsets.all(8.0),
                     decoration: BoxDecoration(
                       color: Color.fromARGB(116, 236, 236, 237),
@@ -148,6 +149,7 @@ class _NoteListScreenState extends State<NoteListScreen> {
                       borderRadius: const BorderRadius.all(Radius.circular(15)),
                     ),
                     child: ListView.builder(
+                    shrinkWrap: true,
                       itemCount: controller.notes.length,
                       itemBuilder: (context, index) {
                         final note = controller.notes[index];
@@ -158,8 +160,8 @@ class _NoteListScreenState extends State<NoteListScreen> {
                             decoration: BoxDecoration(
                               color: Color.fromARGB(255, 255, 255, 255),
                               border: Border.all(
-                                color: const Color.fromARGB(51, 205, 205, 205),
-                                width: 2,
+                                color: Color.fromARGB(180, 205, 205, 205),
+                                width: 1,
                               ),
                               borderRadius:
                                   const BorderRadius.all(Radius.circular(5)),
@@ -169,35 +171,67 @@ class _NoteListScreenState extends State<NoteListScreen> {
                                 controller.titleController.text = note.title;
                                 showDialog(
                                     context: context,
-                                    builder: (context) => EditNewPeriod(
+                                    builder: (context) => InfoPeriod(
                                           controller: controller,
+                                          category: note.category,
+                                          meta1: note.meta1,
+                                          meta2: note.meta2,
+                                          dateInit: note.dataInit,
+                                          dateFinal: note.dateFinal,
                                           excluir: () async {
                                             await controller.delete(note.id!);
                                             controller.getAllNotes();
                                             Navigator.pop(context);
                                           },
                                           editar: () async {
-                                            note.title = controller.titleController.text;
-                                            await controller.update(note);
-                                            controller.getAllNotes();
                                             Navigator.pop(context);
-                                          },
-                                          category: note.category,
-                                          meta1: note.meta1,
-                                          meta2: note.meta2,
-                                          dateInit: note.dataInit,
-                                          dateFinal: note.dateFinal,
-                                        ));
+                                            controller.titleController.text = note.title;
+                                            controller.onSelectedEstado(note.category);
+                                            controller.dateFinal = DateTime.parse(note.dateFinal);
+                                            controller.dateInit = DateTime.parse(note.dataInit);
+                                            controller.meta1.text = note.meta1;
+                                            controller.meta2.text =  note.meta2;
+                                            showDialog(
+                                            context: context,
+                                            builder: (context) => EditNewPeriod(
+                                            controller: controller,
+                                            add: () async {
+                                              if (controller.titleController.text.isNotEmpty && controller.dropdownStateValue.isNotEmpty) {
+                                                await controller.update(Period(
+                                                  id: note.id,
+                                                  title: controller.titleController.text,
+                                                  category: controller.dropdownStateValue,
+                                                  dataInit:  controller.dateInit.toIso8601String(),
+                                                  dateFinal: controller.dateFinal.toIso8601String(),
+                                                  meta1: controller.meta1.text,
+                                                  meta2: controller.meta2.text,
+                                                ));
+                                              }
+                                              controller.getAllNotes();
+                                              Navigator.pop(context);
+                                            }));
+                                             },
+                                             ));
                               },
                               child: ListTile(
                                 title: Padding(
-                                  padding: const EdgeInsets.only(bottom: 10.0),
-                                  child: Manrope(
-                                    text: note.title,
-                                    color:
-                                        const Color.fromARGB(255, 12, 11, 11),
-                                    font: FontWeight.w500,
-                                    size: 16,
+                                  padding: const EdgeInsets.only(bottom:15.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Manrope(
+                                        text: note.title,
+                                        color:const Color.fromARGB(255, 12, 11, 11),
+                                        font: FontWeight.w500,
+                                        size: 16,
+                                      ),
+                                       Manrope(
+                                        text: "${Mask.formatDateForBR(note.dataInit)} a ${Mask.formatDateForBR(note.dateFinal)}",
+                                        color:const Color.fromARGB(255, 12, 11, 11),
+                                        font: FontWeight.w400,
+                                        size: 12,
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),
@@ -208,192 +242,85 @@ class _NoteListScreenState extends State<NoteListScreen> {
                     ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    CustomButtonStandard(
-                      height: 25,
-                      width: 120,
-                      onTap: () async {
-                        controller.titleController.clear();
-                        controller.contentController.clear();
-                        showDialog(
-                            context: context,
-                            builder: (context) => AddNewPeriod(
-                                controller: controller,
-                                add: () async {
-                                  if (controller
-                                          .titleController.text.isNotEmpty &&
-                                      controller
-                                          .dropdownStateValue.isNotEmpty) {
-                                    await controller.insert(Note(
-                                      title: controller.titleController.text,
-                                      category: controller.dropdownStateValue,
-                                      dataInit: Mask.formatDateForBR2(controller.dateInit),
-                                      dateFinal:
-                                         Mask.formatDateForBR2(controller.dateFinal),
-                                      meta1: controller.meta1.text,
-                                      meta2: controller.meta2.text,
-                                    ));
-                                    controller.getAllNotes();
-                                    Navigator.pop(context);
-                                  }
-                                }));
-                        // AlertDialog(
-                        //       title: const Text('Add Note'),
-                        //       content: Column(
-                        //         mainAxisSize: MainAxisSize.min,
-                        //         children: [
-                        //           TextField(
-                        //             controller: controller.titleController,
-                        //             decoration: const InputDecoration(
-                        //                 labelText: 'Title'),
-                        //           ),
-                        //           TextField(
-                        //             controller:
-                        //                 controller.contentController,
-                        //             decoration: const InputDecoration(
-                        //                 labelText: 'Content'),
-                        //           ),
-                        //         ],
-                        //       ),
-                        //       actions: [
-                        //         ElevatedButton(
-                        //           onPressed: () {
-                        //             Navigator.pop(context);
-                        //           },
-                        //           child: const Text('Cancel'),
-                        //         ),
-                        //         ElevatedButton(
-                        //           onPressed: () async {
-                        //             final title =
-                        //                 controller.titleController.text;
-                        //             final content =
-                        //                 controller.contentController.text;
-                        //             if (title.isNotEmpty &&
-                        //                 content.isNotEmpty) {
-                        //               await controller.insert(Note(
-                        //                 title: title,
-                        //                 content: content,
-                        //               ));
-                        //               controller.getAllNotes();
-                        //               Navigator.pop(context);
-                        //             }
-                        //           },
-                        //           child: const Text('Save'),
-                        //         ),
-                        //       ],
-                        //     ));
-                      },
-                      color: Color.fromARGB(247, 15, 40, 139),
-                      text: "Adicionar Pedido",
-                      size: 12.0,
-                      isLoading: true,
-                    ),
-                  ],
-                ),
-              ),
-              Row(
-                children: const [
-                  Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: CircleAvatar(
-                      radius: 40,
-                      backgroundImage:
-                          NetworkImage('https://exemplo.com/sua/imagem.jpg'),
-                    ),
-                  ),
-                  Column(
+                Padding(
+                  padding: const EdgeInsets.only(right: 10.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Manrope(
-                        text: "João",
-                        color: Color.fromARGB(255, 33, 8, 227),
-                        font: FontWeight.w500,
-                        size: 18,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(right: 10.0),
-                        child: Manrope(
-                          decoration: TextDecoration.underline,
-                          text: "Sair",
-                          color: Color.fromARGB(255, 33, 8, 227),
-                          font: FontWeight.w500,
-                          size: 15,
-                        ),
+                      CustomButtonStandard(
+                        height: 25,
+                        width: 120,
+                        onTap: () async {
+                          controller.titleController.clear();
+                          showDialog(
+                              context: context,
+                              builder: (context) => AddNewPeriod(
+                                  controller: controller,
+                                  add: () async {
+                                    if (controller
+                                            .titleController.text.isNotEmpty &&
+                                        controller
+                                            .dropdownStateValue.isNotEmpty) {
+                                      await controller.insert(Period(
+                                        title: controller.titleController.text,
+                                        category: controller.dropdownStateValue,
+                                        dataInit:
+                                            controller.dateInit.toIso8601String(),
+                                        dateFinal: controller.dateFinal
+                                            .toIso8601String(),
+                                        meta1: controller.meta1.text,
+                                        meta2: controller.meta2.text,
+                                      ));
+                                      controller.getAllNotes();
+                                      Navigator.pop(context);
+                                    }
+                                  }));
+                        },
+                        color: Color.fromARGB(247, 15, 40, 139),
+                        text: "Adicionar Pedido",
+                        size: 12.0,
+                        isLoading: true,
                       ),
                     ],
-                  )
-                ],
-              ),
-              SizedBox(height: 50),
-            ],
-          ),
-        );
-      }),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {
-      //     _titleController.clear();
-      //     _contentController.clear();
-      //     showDialog(
-      //         context: context, builder: (context) => const EditNewPeriod());
-      //   },
-      //   child: const Icon(Icons.add),
-      // ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          controller.titleController.clear();
-          controller.contentController.clear();
-          showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              title: const Text('Add Note'),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  TextField(
-                    controller: controller.titleController,
-                    decoration: const InputDecoration(labelText: 'Title'),
                   ),
-                  TextField(
-                    controller: controller.contentController,
-                    decoration: const InputDecoration(labelText: 'Content'),
-                  ),
-                ],
-              ),
-              actions: [
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text('Cancel'),
                 ),
-                ElevatedButton(
-                  onPressed: () async {
-                    final title = controller.titleController.text;
-                    final content = controller.contentController.text;
-                    if (title.isNotEmpty && content.isNotEmpty) {
-                      await controller.insert(Note(
-                        title: controller.titleController.text,
-                        category: controller.dropdownStateValue,
-                        dataInit: controller.dateInit.toString(),
-                        dateFinal: controller.dateFinal.toString(),
-                        meta1: controller.meta1.text,
-                        meta2: controller.meta2.text,
-                      ));
-                      controller.getAllNotes();
-                      Navigator.pop(context);
-                    }
-                  },
-                  child: const Text('Save'),
+                Row(
+                  children: const [
+                    Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: CircleAvatar(
+                        radius: 40,
+                        backgroundImage:
+                            NetworkImage('https://exemplo.com/sua/imagem.jpg'),
+                      ),
+                    ),
+                    Column(
+                      children: [
+                        Manrope(
+                          text: "João",
+                          color: Color.fromARGB(255, 33, 8, 227),
+                          font: FontWeight.w500,
+                          size: 18,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(right: 10.0),
+                          child: Manrope(
+                            decoration: TextDecoration.underline,
+                            text: "Sair",
+                            color: Color.fromARGB(255, 33, 8, 227),
+                            font: FontWeight.w500,
+                            size: 15,
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
                 ),
+                SizedBox(height: 50),
               ],
-            ),
-          );
-        },
-        child: const Icon(Icons.add),
+            );
+          }),
+        ),
       ),
     );
   }

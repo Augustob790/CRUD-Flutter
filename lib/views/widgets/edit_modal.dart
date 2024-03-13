@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:teste_pleno/views/widgets/custom_calendar.dart';
+import 'package:teste_pleno/views/widgets/dropdown.dart';
 import 'package:teste_pleno/views/widgets/input_personalized.dart';
 
 import '../../presentation/controller/home_page_controller.dart';
@@ -8,60 +10,16 @@ import 'custom_button.dart';
 import 'manrope.dart';
 
 class EditNewPeriod extends StatefulWidget {
-  const EditNewPeriod({super.key, required this.controller, required this.excluir, required this.editar, required this.category, required this.meta1, required this.meta2, required this.dateInit, required this.dateFinal});
-  // final OpinionsController controller;
-  final String category;
-  final String meta1;
-  final String meta2;
-  final String dateInit;
-  final String dateFinal;
-  // final int quant;
-  // final String prefsName;
-  // final SharedPreferences prefs;
+  const EditNewPeriod({super.key, required this.controller, required this.add});
 
   final HomePageController controller;
-  final dynamic Function() excluir;
-  final dynamic Function() editar;
+  final dynamic Function() add;
 
   @override
-  State<EditNewPeriod> createState() => _PopUpOpinionsState();
+  State<EditNewPeriod> createState() => _EditNewPeriodState();
 }
 
-class _PopUpOpinionsState extends State<EditNewPeriod> {
-  String dropdownStateValue = "Categoria";
-  DateTime date = DateTime.now();
-  DateTime dateInit = DateTime.now();
-
-  List<String> categoria = [
-    'Categoria',
-    'Categoria 1',
-    'Categoria 2',
-    'Categoria 3',
-    'Categoria 4',
-    'Categoria 5',
-    'Categoria 6',
-  ];
-
-  // onSelectedEstado(String estadoName) {
-  //                                     dropdownStateValue = estadoName;
-  //                                     notifyListeners();
-  //                                   }
-
-  initialize(DateTime dateTime) async {
-    date = dateTime;
-  }
-
-  initializeInit(DateTime dateTime) async {
-    dateInit = dateTime;
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    initialize(DateTime.now());
-    initializeInit(DateTime.now());
-  }
-
+class _EditNewPeriodState extends State<EditNewPeriod> {
   @override
   Widget build(BuildContext context) {
     return _buildAddProductsModal(context);
@@ -71,72 +29,77 @@ class _PopUpOpinionsState extends State<EditNewPeriod> {
     final Size size = MediaQuery.of(context).size;
     return Stack(
       children: [
-        ModalBarrier(
+       ModalBarrier(
           color: Colors.black.withOpacity(0.25),
           dismissible: true,
         ),
         AlertDialog(
-          backgroundColor: Color.fromARGB(255, 255, 255, 255),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 40.0),
-                          child: const Text(
-                            "Nova Período",
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w700,
-                              color: Color.fromRGBO(46, 44, 52, 1),
+          backgroundColor: Colors.white,
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 40.0),
+                            child: const Text(
+                              "Nova Período",
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: Color.fromRGBO(46, 44, 52, 1),
+                              ),
                             ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 5.0),
-                          child: TextButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: Manrope(
-                                text: "X",
-                                size: 20,
-                                color: Colors.black,
-                              )),
-                        )
-                      ],
-                    ),
-                    const SizedBox(height: 5),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        InputPersonalized(
-                          validator: null,
-                          controller: widget.controller.titleController,
-                          obscure: false,
-                          height: 40,
-                          width: (size.width / 1.78),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 10),
-                    SizedBox(
-                      width: 210,
-                      child: Column(
-                        children: [
-                          const SizedBox(height: 5),
                           Padding(
-                            padding: const EdgeInsets.only(top: 10, bottom: 10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            padding: const EdgeInsets.only(left: 5.0),
+                            child: TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Manrope(
+                                  text: "X",
+                                  size: 15,
+                                  color: const Color.fromARGB(255, 188, 188, 188),
+                                )),
+                          )
+                        ],
+                      ),
+                      const SizedBox(height: 5),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          InputPersonalized(
+                            validator: null,
+                            controller: widget.controller.titleController,
+                            //labelText: "Nomeie seu periodo",
+                            obscure: false,
+                            height: 40,
+                            width: (size.width / 1.78),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 10),
+                      Container(
+                        height: 140,
+                        decoration: BoxDecoration(
+                          color: Color.fromARGB(116, 236, 236, 237),
+                          border: Border.symmetric(),
+                          borderRadius: const BorderRadius.all(Radius.circular(5)),
+                        ),
+                        child: Column(
+                          children: [
+                            const SizedBox(height: 5),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 const Manrope(
                                   text: "Começa",
@@ -145,24 +108,29 @@ class _PopUpOpinionsState extends State<EditNewPeriod> {
                                   size: 14,
                                 ),
                                 const SizedBox(width: 5),
-                                 Manrope(
-                                  text: widget.dateInit,
-                                  color: Color.fromARGB(255, 12, 11, 11),
-                                  font: FontWeight.w400,
-                                  size: 14,
-                                ),
+                                SizedBox(
+                                  width: 120,
+                                  height: 30,
+                                  child: CustomDateCalendar(
+                                    date: widget.controller.dateInit,
+                                    fontSize: 14,
+                                    onChangedDate: (DateTime date) {
+                                      setState(() {
+                                        widget.controller.initializeInit(date);
+                                      });
+                                    },
+                                    positionedLeft: 65,
+                                    positionedTop: 130,
+                                  ),
+                                )
                               ],
                             ),
-                          ),
-                          Padding(
-                            padding:
-                                const EdgeInsets.only(left: 2.0, right: 2.0),
-                            child: Divider(height: 10),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 10, bottom: 10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                              child: Divider(height: 10),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 const Manrope(
                                   text: "Termina",
@@ -171,24 +139,28 @@ class _PopUpOpinionsState extends State<EditNewPeriod> {
                                   size: 14,
                                 ),
                                 const SizedBox(width: 5),
-                                 Manrope(
-                                  text: widget.dateFinal,
-                                  color: Color.fromARGB(255, 12, 11, 11),
-                                  font: FontWeight.w400,
-                                  size: 14,
-                                ),
+                                SizedBox(
+                                    width: 120,
+                                    height: 30,
+                                    child: CustomDateCalendar(
+                                      date: widget.controller.dateFinal,
+                                      fontSize: 14,
+                                      onChangedDate: (DateTime date) {
+                                        setState(() {
+                                          widget.controller.initializeFinal(date);
+                                        });
+                                      },
+                                      positionedLeft: 65,
+                                      positionedTop: 130,
+                                    )),
                               ],
                             ),
-                          ),
-                          Padding(
-                            padding:
-                                const EdgeInsets.only(left: 2.0, right: 2.0),
-                            child: Divider(height: 10),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 10, bottom: 10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                              child: Divider(height: 10),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 const Manrope(
                                   text: "Categoria",
@@ -197,85 +169,103 @@ class _PopUpOpinionsState extends State<EditNewPeriod> {
                                   size: 14,
                                 ),
                                 const SizedBox(width: 5),
-                                Manrope(
-                                  text: widget.category,
-                                  color: Color.fromARGB(255, 12, 11, 11),
-                                  font: FontWeight.w400,
-                                  size: 14,
+                                Container(
+                                  height: 45,
+                                  width: 120,
+                                  decoration: BoxDecoration(
+                                    color: Color.fromARGB(252, 250, 247, 247),
+                                    border: Border.symmetric(),
+                                    borderRadius:
+                                        const BorderRadius.all(Radius.circular(5)),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 15.0),
+                                    child: DropdownButtonForm(
+                                      validator: (String? value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Selecione a categoria';
+                                        }
+                                        return null;
+                                      },
+                                      onTap: (String? value) {
+                                        widget.controller.onSelectedEstado(value ?? "");
+                                      },
+                                      value: widget.controller.dropdownStateValue,
+                                      lists: widget.controller.categoria,
+                                    ),
+                                  ),
                                 ),
                               ],
                             ),
-                          ),
-                          const SizedBox(height: 20),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Manrope(
-                                text: "Meta 1",
-                                color: Color.fromARGB(255, 12, 11, 11),
-                                font: FontWeight.w600,
-                                size: 14,
-                              ),
-                              const SizedBox(width: 5),
-                               Manrope(
-                                text: widget.meta1,
-                                color: Color.fromARGB(255, 12, 11, 11),
-                                font: FontWeight.w400,
-                                size: 14,
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 20),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Manrope(
-                                text: "Meta 2",
-                                color: Color.fromARGB(255, 12, 11, 11),
-                                font: FontWeight.w500,
-                                size: 14,
-                              ),
-                              const SizedBox(width: 5),
-                               Manrope(
-                                text:widget.meta2,
-                                color: Color.fromARGB(255, 12, 11, 11),
-                                font: FontWeight.w400,
-                                size: 14,
-                              ),
-                            ],
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 25),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(),
-                      child: Row(
+                      const SizedBox(height: 10),
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          CustomButtonStandard(
-                            height: 35,
-                            width: 100,
-                            onTap: widget.excluir,
-                            color: Color.fromARGB(255, 255, 0, 0),
-                            text: "Excluir",
-                            isLoading: true,
+                          const Manrope(
+                            text: "Meta 1",
+                            color: Color.fromARGB(255, 12, 11, 11),
+                            font: FontWeight.w600,
+                            size: 14,
                           ),
-                          CustomButtonStandard(
-                            height: 35,
-                            width: 100,
-                            onTap: widget.editar,
-                            color: Color.fromARGB(247, 15, 40, 139),
-                            text: "Editar",
-                            isLoading: true,
+                          const SizedBox(width: 5),
+                          InputPersonalized(
+                            validator: null,
+                            controller: widget.controller.meta1,
+                            //labelText: "Un",
+                            obscure: false,
+                            height: 40,
+                            width: 80,
+                            borderRadius: const BorderRadius.all(Radius.circular(20)),
                           ),
                         ],
                       ),
-                    ),
-                  ],
+                      const SizedBox(height: 10),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Manrope(
+                            text: "Meta 2",
+                            color: Color.fromARGB(255, 12, 11, 11),
+                            font: FontWeight.w600,
+                            size: 14,
+                          ),
+                          const SizedBox(width: 5),
+                          InputPersonalized(
+                            validator: null,
+                            controller: widget.controller.meta2,
+                            //labelText: "Un",
+                            obscure: false,
+                            height: 45,
+                            width: 100,
+                            borderRadius: const BorderRadius.all(Radius.circular(20)),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 20),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CustomButtonStandard(
+                              height: 35,
+                              width: 100,
+                              onTap: widget.add,
+                              color: Color.fromARGB(247, 15, 40, 139),
+                              text: "Concluir",
+                              isLoading: true,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ],
