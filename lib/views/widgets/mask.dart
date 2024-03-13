@@ -1,8 +1,6 @@
-
-
-
 class Mask {
-  static formatDateForBR(DateTime dateTime) {
+
+  static formatDate(DateTime dateTime) {
     String day = "";
     String month = "";
     String year = "";
@@ -12,19 +10,43 @@ class Mask {
     return "${noOneNumber(day)}/${noOneNumber(month)}/$year";
   }
 
-  static String formatDateForBR2(DateTime dateTime) {
-  List<String> months = [
-    "jan.", "fev.", "mar.", "abr.", "mai.", "jun.",
-    "jul.", "ago.", "set.", "out.", "nov.", "dez."
-  ];
 
-  String day = dateTime.day.toString();
-  String month = months[dateTime.month - 1]; // Adjusting month index
-  String year = dateTime.year.toString();
+  static formatDateForBR(String dateTime) {
+    final date = DateTime.parse(dateTime);
+    String day = "";
+    String month = "";
+    String year = "";
+    day = date.day.toString();
+    month = date.month.toString();
+    year = date.year.toString();
+    return "${noOneNumber(day)}/${noOneNumber(month)}/$year";
+  }
 
-  return "$day de $month de $year";
-}
-  
+  static String formatDateForBR2(String dateTime) {
+    final date = DateTime.parse(dateTime);
+
+    List<String> months = [
+      "jan.",
+      "fev.",
+      "mar.",
+      "abr.",
+      "mai.",
+      "jun.",
+      "jul.",
+      "ago.",
+      "set.",
+      "out.",
+      "nov.",
+      "dez."
+    ];
+
+    String day = date.day.toString();
+    String month = months[date.month - 1]; // Adjusting month index
+    String year = date.year.toString();
+
+    return "$day de $month de $year";
+  }
+
   static formatDateOfHour(String value) {
     // 2023-05-26 17:32:12.622331
     String day = "";
@@ -55,7 +77,6 @@ class Mask {
     }
   }
 
-
   static noOneNumber(String i) {
     if (i.length == 1) {
       return "0$i";
@@ -63,5 +84,4 @@ class Mask {
       return i;
     }
   }
-
 }
