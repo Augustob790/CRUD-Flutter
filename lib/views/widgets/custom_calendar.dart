@@ -32,7 +32,7 @@ class CustomDateCalendar extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("${Mask.formatDateForBR(date)}",
+            Text("${Mask.formatDate(date)}",
               style:  TextStyle(
                 color: Colors.black,
                 fontSize: fontSize,
