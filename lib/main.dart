@@ -3,7 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
-import 'views/pages/home_page.dart';
+import 'presentation/pages/home_page.dart';
+import 'presentation/providers/dependency_injections.provider.dart';
 
 void main() async {
   await initializeDateFormatting();
@@ -16,13 +17,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'SQLite CRUD',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+    return DependecyInjectionsProvider(
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'SQLite CRUD',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        home: NoteListScreen(),
       ),
-      home: NoteListScreen(),
     );
   }
 }

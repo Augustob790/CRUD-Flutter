@@ -1,29 +1,33 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:teste_pleno/views/widgets/custom_calendar.dart';
-import 'package:teste_pleno/views/widgets/dropdown.dart';
 import 'package:teste_pleno/views/widgets/input_personalized.dart';
 
+import '../../presentation/controller/home_page_controller.dart';
 import 'custom_button.dart';
 import 'manrope.dart';
 
 class EditNewPeriod extends StatefulWidget {
-  const EditNewPeriod({super.key});
+  const EditNewPeriod({super.key, required this.controller, required this.excluir, required this.editar, required this.category, required this.meta1, required this.meta2, required this.dateInit, required this.dateFinal});
   // final OpinionsController controller;
-  // final String local;
-  // final String description;
-  // final String text;
+  final String category;
+  final String meta1;
+  final String meta2;
+  final String dateInit;
+  final String dateFinal;
   // final int quant;
   // final String prefsName;
   // final SharedPreferences prefs;
+
+  final HomePageController controller;
+  final dynamic Function() excluir;
+  final dynamic Function() editar;
 
   @override
   State<EditNewPeriod> createState() => _PopUpOpinionsState();
 }
 
 class _PopUpOpinionsState extends State<EditNewPeriod> {
-  final TextEditingController contentController = TextEditingController();
   String dropdownStateValue = "Categoria";
   DateTime date = DateTime.now();
   DateTime dateInit = DateTime.now();
@@ -67,7 +71,7 @@ class _PopUpOpinionsState extends State<EditNewPeriod> {
     final Size size = MediaQuery.of(context).size;
     return Stack(
       children: [
-      ModalBarrier(
+        ModalBarrier(
           color: Colors.black.withOpacity(0.25),
           dismissible: true,
         ),
@@ -116,8 +120,7 @@ class _PopUpOpinionsState extends State<EditNewPeriod> {
                       children: [
                         InputPersonalized(
                           validator: null,
-                          controller: contentController,
-                          labelText: "Nomeie seu periodo",
+                          controller: widget.controller.titleController,
                           obscure: false,
                           height: 40,
                           width: (size.width / 1.78),
@@ -142,17 +145,18 @@ class _PopUpOpinionsState extends State<EditNewPeriod> {
                                   size: 14,
                                 ),
                                 const SizedBox(width: 5),
-                                const Manrope(
-                                  text: "4 de set. de 2023",
+                                 Manrope(
+                                  text: widget.dateInit,
                                   color: Color.fromARGB(255, 12, 11, 11),
-                                font: FontWeight.w400,
+                                  font: FontWeight.w400,
                                   size: 14,
                                 ),
                               ],
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(left: 2.0, right: 2.0),
+                            padding:
+                                const EdgeInsets.only(left: 2.0, right: 2.0),
                             child: Divider(height: 10),
                           ),
                           Padding(
@@ -167,17 +171,18 @@ class _PopUpOpinionsState extends State<EditNewPeriod> {
                                   size: 14,
                                 ),
                                 const SizedBox(width: 5),
-                                const Manrope(
-                                  text: "4 de set. de 2023",
+                                 Manrope(
+                                  text: widget.dateFinal,
                                   color: Color.fromARGB(255, 12, 11, 11),
-                                font: FontWeight.w400,
+                                  font: FontWeight.w400,
                                   size: 14,
                                 ),
                               ],
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(left: 2.0, right: 2.0),
+                            padding:
+                                const EdgeInsets.only(left: 2.0, right: 2.0),
                             child: Divider(height: 10),
                           ),
                           Padding(
@@ -192,10 +197,10 @@ class _PopUpOpinionsState extends State<EditNewPeriod> {
                                   size: 14,
                                 ),
                                 const SizedBox(width: 5),
-                                const Manrope(
-                                  text: "Categoria 5",
+                                Manrope(
+                                  text: widget.category,
                                   color: Color.fromARGB(255, 12, 11, 11),
-                                font: FontWeight.w400,
+                                  font: FontWeight.w400,
                                   size: 14,
                                 ),
                               ],
@@ -212,8 +217,8 @@ class _PopUpOpinionsState extends State<EditNewPeriod> {
                                 size: 14,
                               ),
                               const SizedBox(width: 5),
-                              const Manrope(
-                                text: "300",
+                               Manrope(
+                                text: widget.meta1,
                                 color: Color.fromARGB(255, 12, 11, 11),
                                 font: FontWeight.w400,
                                 size: 14,
@@ -231,8 +236,8 @@ class _PopUpOpinionsState extends State<EditNewPeriod> {
                                 size: 14,
                               ),
                               const SizedBox(width: 5),
-                              const Manrope(
-                                text: "500",
+                               Manrope(
+                                text:widget.meta2,
                                 color: Color.fromARGB(255, 12, 11, 11),
                                 font: FontWeight.w400,
                                 size: 14,
@@ -251,7 +256,7 @@ class _PopUpOpinionsState extends State<EditNewPeriod> {
                           CustomButtonStandard(
                             height: 35,
                             width: 100,
-                            onTap: () async {},
+                            onTap: widget.excluir,
                             color: Color.fromARGB(255, 255, 0, 0),
                             text: "Excluir",
                             isLoading: true,
@@ -259,7 +264,7 @@ class _PopUpOpinionsState extends State<EditNewPeriod> {
                           CustomButtonStandard(
                             height: 35,
                             width: 100,
-                            onTap: () async {},
+                            onTap: widget.editar,
                             color: Color.fromARGB(247, 15, 40, 139),
                             text: "Editar",
                             isLoading: true,

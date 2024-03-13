@@ -5,11 +5,12 @@ import 'package:teste_pleno/views/widgets/custom_calendar.dart';
 import 'package:teste_pleno/views/widgets/dropdown.dart';
 import 'package:teste_pleno/views/widgets/input_personalized.dart';
 
+import '../../presentation/controller/home_page_controller.dart';
 import 'custom_button.dart';
 import 'manrope.dart';
 
 class AddNewPeriod extends StatefulWidget {
-  const AddNewPeriod({super.key});
+  const AddNewPeriod({super.key, required this.controller, required this.add});
   // final OpinionsController controller;
   // final String local;
   // final String description;
@@ -18,46 +19,14 @@ class AddNewPeriod extends StatefulWidget {
   // final String prefsName;
   // final SharedPreferences prefs;
 
+  final HomePageController controller;
+  final dynamic Function() add;
+
   @override
   State<AddNewPeriod> createState() => _PopUpOpinionsState();
 }
 
 class _PopUpOpinionsState extends State<AddNewPeriod> {
-  final TextEditingController contentController = TextEditingController();
-  String dropdownStateValue = "Categoria";
-  DateTime date = DateTime.now();
-  DateTime dateInit = DateTime.now();
-
-  List<String> categoria = [
-    'Categoria',
-    'Categoria 1',
-    'Categoria 2',
-    'Categoria 3',
-    'Categoria 4',
-    'Categoria 5',
-    'Categoria 6',
-  ];
-
-  // onSelectedEstado(String estadoName) {
-  //                                     dropdownStateValue = estadoName;
-  //                                     notifyListeners();
-  //                                   }
-
-  initialize(DateTime dateTime) async {
-    date = dateTime;
-  }
-
-  initializeInit(DateTime dateTime) async {
-    dateInit = dateTime;
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    initialize(DateTime.now());
-    initializeInit(DateTime.now());
-  }
-
   @override
   Widget build(BuildContext context) {
     return _buildAddProductsModal(context);
@@ -110,8 +79,8 @@ class _PopUpOpinionsState extends State<AddNewPeriod> {
                   children: [
                     InputPersonalized(
                       validator: null,
-                      controller: contentController,
-                      labelText: "Nomeie seu periodo",
+                      controller: widget.controller.titleController,
+                      //labelText: "Nomeie seu periodo",
                       obscure: false,
                       height: 40,
                       width: (size.width / 1.78),
@@ -143,11 +112,11 @@ class _PopUpOpinionsState extends State<AddNewPeriod> {
                             width: 120,
                             height: 30,
                             child: CustomDateCalendar(
-                              date: dateInit,
+                              date: widget.controller.dateInit,
                               fontSize: 14,
                               onChangedDate: (DateTime date) {
                                 setState(() {
-                                  initializeInit(date);
+                                  widget.controller.initializeInit(date);
                                 });
                               },
                               positionedLeft: 65,
@@ -157,7 +126,7 @@ class _PopUpOpinionsState extends State<AddNewPeriod> {
                         ],
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left:8.0, right: 8.0),
+                        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                         child: Divider(height: 10),
                       ),
                       Row(
@@ -174,20 +143,18 @@ class _PopUpOpinionsState extends State<AddNewPeriod> {
                               width: 120,
                               height: 30,
                               child: CustomDateCalendar(
-                                date: date,
+                                date: widget.controller.dateFinal,
                                 fontSize: 14,
                                 onChangedDate: (DateTime date) {
-                                  setState(() {
-                                    initialize(date);
-                                  });
+                                  widget.controller.initializeFinal(date);
                                 },
-                              positionedLeft: 65,
-                              positionedTop: 130,
+                                positionedLeft: 65,
+                                positionedTop: 130,
                               )),
                         ],
                       ),
-                       Padding(
-                        padding: const EdgeInsets.only(left:8.0, right: 8.0),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                         child: Divider(height: 10),
                       ),
                       Row(
@@ -218,9 +185,11 @@ class _PopUpOpinionsState extends State<AddNewPeriod> {
                                   }
                                   return null;
                                 },
-                                onTap: (String? value) {},
-                                value: dropdownStateValue,
-                                lists: categoria,
+                                onTap: (String? value) {
+                                  widget.controller.onSelectedEstado(value ?? "");
+                                },
+                                value: widget.controller.dropdownStateValue,
+                                lists: widget.controller.categoria,
                               ),
                             ),
                           ),
@@ -242,8 +211,8 @@ class _PopUpOpinionsState extends State<AddNewPeriod> {
                     const SizedBox(width: 5),
                     InputPersonalized(
                       validator: null,
-                      controller: contentController,
-                      labelText: "Un",
+                      controller: widget.controller.meta1,
+                      //labelText: "Un",
                       obscure: false,
                       height: 40,
                       width: 80,
@@ -264,8 +233,8 @@ class _PopUpOpinionsState extends State<AddNewPeriod> {
                     const SizedBox(width: 5),
                     InputPersonalized(
                       validator: null,
-                      controller: contentController,
-                      labelText: "Un",
+                      controller: widget.controller.meta2,
+                      //labelText: "Un",
                       obscure: false,
                       height: 40,
                       width: 80,
@@ -282,8 +251,8 @@ class _PopUpOpinionsState extends State<AddNewPeriod> {
                       CustomButtonStandard(
                         height: 35,
                         width: 100,
-                        onTap: () async {},
-                        color:Color.fromARGB(247, 15, 40, 139),
+                        onTap: widget.add,
+                        color: Color.fromARGB(247, 15, 40, 139),
                         text: "Concluir",
                         isLoading: true,
                       ),

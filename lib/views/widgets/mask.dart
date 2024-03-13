@@ -12,6 +12,19 @@ class Mask {
     return "${noOneNumber(day)}/${noOneNumber(month)}/$year";
   }
 
+  static String formatDateForBR2(DateTime dateTime) {
+  List<String> months = [
+    "jan.", "fev.", "mar.", "abr.", "mai.", "jun.",
+    "jul.", "ago.", "set.", "out.", "nov.", "dez."
+  ];
+
+  String day = dateTime.day.toString();
+  String month = months[dateTime.month - 1]; // Adjusting month index
+  String year = dateTime.year.toString();
+
+  return "$day de $month de $year";
+}
+  
   static formatDateOfHour(String value) {
     // 2023-05-26 17:32:12.622331
     String day = "";
