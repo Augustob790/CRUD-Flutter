@@ -2,14 +2,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:teste_pleno/views/widgets/info_modal.dart';
+import 'package:teste_pleno/presentation/pages/info/info_modal.dart';
 import '../../const/image_const.dart';
-import '../../model/note.dart';
-import '../../views/widgets/add_modal.dart';
-import '../../views/widgets/custom_button.dart';
-import '../../views/widgets/edit_modal.dart';
-import '../../views/widgets/manrope.dart';
-import '../../views/widgets/mask.dart';
+import '../../domain/model/ period.dart';
+import 'add/add_modal.dart';
+import 'widgets/custom_button.dart';
+import 'edit/edit_modal.dart';
+import 'widgets/manrope.dart';
+import 'widgets/mask.dart';
 import '../controller/home_page_controller.dart';
 
 class NoteListScreen extends StatefulWidget {

@@ -2,28 +2,37 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:teste_pleno/views/widgets/custom_calendar.dart';
-import 'package:teste_pleno/views/widgets/dropdown.dart';
-import 'package:teste_pleno/views/widgets/input_personalized.dart';
+import 'package:teste_pleno/presentation/pages/widgets/custom_calendar.dart';
+import 'package:teste_pleno/presentation/pages/widgets/dropdown.dart';
+import 'package:teste_pleno/presentation/pages/widgets/input_personalized.dart';
 
-import '../../presentation/controller/home_page_controller.dart';
-import 'custom_button.dart';
-import 'manrope.dart';
+import '../../controller/home_page_controller.dart';
+import '../widgets/custom_button.dart';
+import '../widgets/manrope.dart';
 
-class EditNewPeriod extends StatefulWidget {
-  const EditNewPeriod({super.key, required this.controller, required this.add});
+class AddNewPeriod extends StatefulWidget {
+  const AddNewPeriod({super.key, required this.controller, required this.add});
 
   final HomePageController controller;
   final dynamic Function() add;
 
   @override
-  State<EditNewPeriod> createState() => _EditNewPeriodState();
+  State<AddNewPeriod> createState() => _PopUpOpinionsState();
 }
 
-class _EditNewPeriodState extends State<EditNewPeriod> {
+class _PopUpOpinionsState extends State<AddNewPeriod> {
+  String textLabel = "Nomeie seu periodo";
+  String un1 = "un";
+  String un2 = "un";
   @override
   Widget build(BuildContext context) {
     return _buildAddProductsModal(context);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    widget.controller.inicialize();
   }
 
   _buildAddProductsModal(BuildContext context) {
@@ -55,7 +64,7 @@ class _EditNewPeriodState extends State<EditNewPeriod> {
                       ),
                       Expanded(
                         child: Align(
-                          alignment: Alignment.centerRight,
+                          alignment: Alignment.center,
                           child: Padding(
                             padding: const EdgeInsets.only(left: 5.0),
                             child: TextButton(
@@ -65,15 +74,13 @@ class _EditNewPeriodState extends State<EditNewPeriod> {
                                 child: Manrope(
                                   text: "X",
                                   size: 20,
-                                  color:
-                                      const Color.fromARGB(255, 188, 188, 188),
+                                  color: const Color.fromARGB(255, 188, 188, 188),
                                 )),
                           ),
                         ),
                       )
                     ],
                   ),
-                  const SizedBox(height: 5),
                   Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: Row(
@@ -82,7 +89,12 @@ class _EditNewPeriodState extends State<EditNewPeriod> {
                         InputPersonalized(
                           validator: null,
                           controller: widget.controller.titleController,
-                          //labelText: "Nomeie seu periodo",
+                          labelText: textLabel,
+                          onChanged: (value) {
+                            setState(() {
+                              textLabel = '';
+                            });
+                          },
                           obscure: false,
                           height: 45,
                           width: (size.width / 1.74),
@@ -231,7 +243,12 @@ class _EditNewPeriodState extends State<EditNewPeriod> {
                           keyboardType: TextInputType.number,
                           validator: null,
                           controller: widget.controller.meta1,
-                          //labelText: "Un",
+                          labelText: un1,
+                          onChanged: (value) {
+                            setState(() {
+                              un1 = '';
+                            });
+                          },
                           obscure: false,
                           height: 45,
                           width: 100,
@@ -245,7 +262,7 @@ class _EditNewPeriodState extends State<EditNewPeriod> {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 5),
                   Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: Row(
@@ -262,7 +279,12 @@ class _EditNewPeriodState extends State<EditNewPeriod> {
                           keyboardType: TextInputType.number,
                           validator: null,
                           controller: widget.controller.meta2,
-                          //labelText: "Un",
+                          labelText: un2,
+                          onChanged: (value) {
+                            setState(() {
+                              un2 = '';
+                            });
+                          },
                           obscure: false,
                           height: 45,
                           width: 100,

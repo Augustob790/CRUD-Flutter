@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 import '../../data/database_helper.dart';
-import '../../model/note.dart';
+import '../../domain/model/ period.dart';
 
 class HomePageController extends ChangeNotifier {
   final TextEditingController titleController = TextEditingController();

@@ -2,37 +2,28 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:teste_pleno/views/widgets/custom_calendar.dart';
-import 'package:teste_pleno/views/widgets/dropdown.dart';
-import 'package:teste_pleno/views/widgets/input_personalized.dart';
+import 'package:teste_pleno/presentation/pages/widgets/custom_calendar.dart';
+import 'package:teste_pleno/presentation/pages/widgets/dropdown.dart';
+import 'package:teste_pleno/presentation/pages/widgets/input_personalized.dart';
 
-import '../../presentation/controller/home_page_controller.dart';
-import 'custom_button.dart';
-import 'manrope.dart';
+import '../../controller/home_page_controller.dart';
+import '../widgets/custom_button.dart';
+import '../widgets/manrope.dart';
 
-class AddNewPeriod extends StatefulWidget {
-  const AddNewPeriod({super.key, required this.controller, required this.add});
+class EditNewPeriod extends StatefulWidget {
+  const EditNewPeriod({super.key, required this.controller, required this.add});
 
   final HomePageController controller;
   final dynamic Function() add;
 
   @override
-  State<AddNewPeriod> createState() => _PopUpOpinionsState();
+  State<EditNewPeriod> createState() => _EditNewPeriodState();
 }
 
-class _PopUpOpinionsState extends State<AddNewPeriod> {
-  String textLabel = "Nomeie seu periodo";
-  String un1 = "un";
-  String un2 = "un";
+class _EditNewPeriodState extends State<EditNewPeriod> {
   @override
   Widget build(BuildContext context) {
     return _buildAddProductsModal(context);
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    widget.controller.inicialize();
   }
 
   _buildAddProductsModal(BuildContext context) {
@@ -64,7 +55,7 @@ class _PopUpOpinionsState extends State<AddNewPeriod> {
                       ),
                       Expanded(
                         child: Align(
-                          alignment: Alignment.center,
+                          alignment: Alignment.centerRight,
                           child: Padding(
                             padding: const EdgeInsets.only(left: 5.0),
                             child: TextButton(
@@ -74,13 +65,15 @@ class _PopUpOpinionsState extends State<AddNewPeriod> {
                                 child: Manrope(
                                   text: "X",
                                   size: 20,
-                                  color: const Color.fromARGB(255, 188, 188, 188),
+                                  color:
+                                      const Color.fromARGB(255, 188, 188, 188),
                                 )),
                           ),
                         ),
                       )
                     ],
                   ),
+                  const SizedBox(height: 5),
                   Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: Row(
@@ -89,12 +82,7 @@ class _PopUpOpinionsState extends State<AddNewPeriod> {
                         InputPersonalized(
                           validator: null,
                           controller: widget.controller.titleController,
-                          labelText: textLabel,
-                          onChanged: (value) {
-                            setState(() {
-                              textLabel = '';
-                            });
-                          },
+                          //labelText: "Nomeie seu periodo",
                           obscure: false,
                           height: 45,
                           width: (size.width / 1.74),
@@ -243,12 +231,7 @@ class _PopUpOpinionsState extends State<AddNewPeriod> {
                           keyboardType: TextInputType.number,
                           validator: null,
                           controller: widget.controller.meta1,
-                          labelText: un1,
-                          onChanged: (value) {
-                            setState(() {
-                              un1 = '';
-                            });
-                          },
+                          //labelText: "Un",
                           obscure: false,
                           height: 45,
                           width: 100,
@@ -262,7 +245,7 @@ class _PopUpOpinionsState extends State<AddNewPeriod> {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 5),
+                  const SizedBox(height: 10),
                   Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: Row(
@@ -279,12 +262,7 @@ class _PopUpOpinionsState extends State<AddNewPeriod> {
                           keyboardType: TextInputType.number,
                           validator: null,
                           controller: widget.controller.meta2,
-                          labelText: un2,
-                          onChanged: (value) {
-                            setState(() {
-                              un2 = '';
-                            });
-                          },
+                          //labelText: "Un",
                           obscure: false,
                           height: 45,
                           width: 100,

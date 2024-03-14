@@ -1,12 +1,12 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:teste_pleno/views/widgets/input_personalized.dart';
-import 'package:teste_pleno/views/widgets/mask.dart';
+import 'package:teste_pleno/presentation/pages/widgets/input_personalized.dart';
+import 'package:teste_pleno/presentation/pages/widgets/mask.dart';
 
-import '../../presentation/controller/home_page_controller.dart';
-import 'custom_button.dart';
-import 'manrope.dart';
+import '../../controller/home_page_controller.dart';
+import '../widgets/custom_button.dart';
+import '../widgets/manrope.dart';
 
 class InfoPeriod extends StatefulWidget {
   const InfoPeriod(
