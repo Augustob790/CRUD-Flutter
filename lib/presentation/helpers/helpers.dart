@@ -1,4 +1,6 @@
-class Mask {
+class Helpers {
+
+  static String imageJoao = 'assets/img/img.png';
 
   static formatDate(DateTime dateTime) {
     String day = "";
@@ -108,3 +110,5 @@ class Mask {
     }
   }
 }
+
+

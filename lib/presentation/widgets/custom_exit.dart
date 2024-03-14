@@ -1,9 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:crud_flutter/presentation/pages/widgets/manrope.dart';
+import 'package:crud_flutter/presentation/widgets/manrope.dart';
 import 'package:flutter/material.dart';
 
-import '../../../const/image_const.dart';
+import '../helpers/helpers.dart';
 
 class CustomExit extends StatelessWidget {
   const CustomExit({super.key});
@@ -16,7 +16,7 @@ class CustomExit extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: 30,
-            backgroundImage: AssetImage(ImageConstant.imageJoao),
+            backgroundImage: AssetImage(Helpers.imageJoao),
           ),
           Padding(
             padding: const EdgeInsets.only(left: 5.0),

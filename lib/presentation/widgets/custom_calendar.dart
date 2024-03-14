@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'calendar_custom.dart';
-import 'mask.dart';
+import '../helpers/helpers.dart';
 
 class CustomDateCalendar extends StatelessWidget {
   const CustomDateCalendar({super.key, required this.onChangedDate, this.initialDate, required this.date, this.positionedLeft, this.positionedRight, this.positionedBottom, this.positionedTop, this.fontSize =16});
@@ -32,7 +32,7 @@ class CustomDateCalendar extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(Mask.formatDateForBRDate(date),
+            Text(Helpers.formatDateForBRDate(date),
               style:  TextStyle(
                 color: Colors.black,
                 fontSize: fontSize,

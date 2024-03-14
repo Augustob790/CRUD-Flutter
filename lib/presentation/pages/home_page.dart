@@ -2,14 +2,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../const/image_const.dart';
 import 'add/add_modal_class.dart';
 import 'info/widget/info_modal_class.dart';
-import 'widgets/custom_button.dart';
-import 'widgets/custom_exit.dart';
-import 'widgets/custom_listtile.dart';
-import 'widgets/manrope.dart';
+import '../widgets/add_new_period.dart';
+import '../widgets/custom_exit.dart';
+import '../widgets/custom_listtile.dart';
+import '../widgets/manrope.dart';
 import '../controller/home_page_controller.dart';
+import '../widgets/top_app.dart';
 
 class NoteListScreen extends StatefulWidget {
   const NoteListScreen({super.key});
@@ -56,66 +56,7 @@ class _NoteListScreenState extends State<NoteListScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Manrope(
-                                  text: "Apelido",
-                                  color: Colors.black,
-                                  font: FontWeight.w500,
-                                  size: 13,
-                                ),
-                                Container(
-                                  height: 30,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    border: Border.all(
-                                        color:
-                                            Color.fromARGB(214, 187, 186, 186),
-                                        width: 2),
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(5)),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            padding: EdgeInsets.all(8.0),
-                            margin: const EdgeInsets.only(left: 30),
-                            decoration: BoxDecoration(
-                              color: Color.fromARGB(117, 197, 197, 197),
-                              border: Border.all(
-                                  color: Color.fromARGB(255, 251, 248, 248),
-                                  width: 2),
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(10)),
-                            ),
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  height: 44,
-                                  width: 44,
-                                  child: CircleAvatar(
-                                    backgroundImage:
-                                        AssetImage(ImageConstant.imageJoao),
-                                  ),
-                                ),
-                                SizedBox(width: 5),
-                                Manrope(
-                                  text: "Editar Foto",
-                                  color: Colors.black,
-                                  font: FontWeight.w500,
-                                  size: 13,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
+                      TopApp(),
                       Divider(height: 40),
                       Manrope(
                         text: "Períodos",
@@ -171,20 +112,13 @@ class _NoteListScreenState extends State<NoteListScreen> {
                         ),
                       ),
                       SizedBox(height: 12),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: CustomButtonStandard(
-                          height: 25,
-                          width: 120,
-                          onTap: () async {
-                            controller.inicialize();
-                            AddNewPeriodClass().init(context: context, controller: controller);
-                          },
-                          color: Color.fromARGB(247, 15, 40, 139),
-                          text: "Adicionar Período",
-                          size: 12.0,
-                          isLoading: true,
-                        ),
+                      AddNewPeriodButton(
+                        onTap: () async {
+                          controller.inicialize();
+                          AddNewPeriodClass()
+                              .init(context: context, controller: controller);
+                        },
+                        controller: controller,
                       ),
                       SizedBox(height: 20),
                     ],

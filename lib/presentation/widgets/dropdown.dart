@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:crud_flutter/presentation/pages/widgets/manrope.dart';
+import 'package:crud_flutter/presentation/widgets/manrope.dart';
 
 class DropdownButtonForm extends StatelessWidget {
   const DropdownButtonForm({super.key, required this.onTap, required this.value, required this.lists, this.initialValue, this.validator, this.color});

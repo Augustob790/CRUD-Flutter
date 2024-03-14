@@ -1,11 +1,11 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:crud_flutter/presentation/pages/widgets/mask.dart';
+import 'package:crud_flutter/presentation/helpers/helpers.dart';
 
 import '../../controller/home_page_controller.dart';
-import '../widgets/custom_button.dart';
-import '../widgets/manrope.dart';
+import '../../widgets/custom_button.dart';
+import '../../widgets/manrope.dart';
 
 class InfoPeriod extends StatefulWidget {
   const InfoPeriod(
@@ -129,7 +129,7 @@ class _InfoPeriodState extends State<InfoPeriod> {
                         ),
                         const SizedBox(width: 5),
                         Manrope(
-                          text: Mask.formatDateForBR2(widget.dateInit),
+                          text: Helpers.formatDateForBR2(widget.dateInit),
                           color: Color.fromARGB(255, 12, 11, 11),
                           font: FontWeight.w400,
                           size: 14,
@@ -153,7 +153,7 @@ class _InfoPeriodState extends State<InfoPeriod> {
                           ),
                           const SizedBox(width: 5),
                           Manrope(
-                            text: Mask.formatDateForBR2(widget.dateFinal),
+                            text: Helpers.formatDateForBR2(widget.dateFinal),
                             color: Color.fromARGB(255, 12, 11, 11),
                             font: FontWeight.w400,
                             size: 14,

@@ -2,13 +2,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:crud_flutter/presentation/pages/widgets/custom_calendar.dart';
-import 'package:crud_flutter/presentation/pages/widgets/dropdown.dart';
-import 'package:crud_flutter/presentation/pages/widgets/input_personalized.dart';
+import 'package:crud_flutter/presentation/widgets/custom_calendar.dart';
+import 'package:crud_flutter/presentation/widgets/dropdown.dart';
+import 'package:crud_flutter/presentation/widgets/input_personalized.dart';
 
 import '../../../controller/home_page_controller.dart';
-import '../../widgets/custom_button.dart';
-import '../../widgets/manrope.dart';
+import '../../../widgets/custom_button.dart';
+import '../../../widgets/manrope.dart';
 
 class EditNewPeriod extends StatefulWidget {
   const EditNewPeriod({super.key, required this.controller, required this.add});

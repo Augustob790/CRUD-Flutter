@@ -1,7 +1,7 @@
-import 'package:crud_flutter/presentation/pages/widgets/mask.dart';
+import 'package:crud_flutter/presentation/helpers/helpers.dart';
 import 'package:flutter/material.dart';
 
-import '../../../domain/model/ period_model.dart';
+import '../../domain/model/ period_model.dart';
 import 'manrope.dart';
 
 class CustomListTile extends StatelessWidget {
@@ -25,7 +25,7 @@ class CustomListTile extends StatelessWidget {
             ),
             Manrope(
               text:
-                  "${Mask.formatDateForBR(period.dataInit)} a ${Mask.formatDateForBR(period.dateFinal)}",
+                  "${Helpers.formatDateForBR(period.dataInit)} a ${Helpers.formatDateForBR(period.dateFinal)}",
               color: const Color.fromARGB(255, 12, 11, 11),
               font: FontWeight.w400,
               size: 12,
