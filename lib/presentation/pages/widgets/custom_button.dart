@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:teste_pleno/presentation/pages/widgets/manrope.dart';
+import 'package:crud_flutter/presentation/pages/widgets/manrope.dart';
 
 class CustomButtonStandard extends StatelessWidget {
   const CustomButtonStandard(

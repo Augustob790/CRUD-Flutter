@@ -1,6 +1,6 @@
 {
-    "name": "teste_pleno",
-    "short_name": "teste_pleno",
+    "name": "crud_flutter",
+    "short_name": "crud_flutter",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

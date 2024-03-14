@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:teste_pleno/presentation/pages/info/info_modal.dart';
+import 'package:crud_flutter/presentation/pages/info/info_modal.dart';
 import '../../const/image_const.dart';
 import '../../domain/model/ period.dart';
 import 'add/add_modal.dart';

@@ -2,9 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:teste_pleno/presentation/pages/widgets/custom_calendar.dart';
-import 'package:teste_pleno/presentation/pages/widgets/dropdown.dart';
-import 'package:teste_pleno/presentation/pages/widgets/input_personalized.dart';
+import 'package:crud_flutter/presentation/pages/widgets/custom_calendar.dart';
+import 'package:crud_flutter/presentation/pages/widgets/dropdown.dart';
+import 'package:crud_flutter/presentation/pages/widgets/input_personalized.dart';
 
 import '../../controller/home_page_controller.dart';
 import '../widgets/custom_button.dart';
