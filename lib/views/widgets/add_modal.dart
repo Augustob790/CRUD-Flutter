@@ -12,13 +12,6 @@ import 'manrope.dart';
 
 class AddNewPeriod extends StatefulWidget {
   const AddNewPeriod({super.key, required this.controller, required this.add});
-  // final OpinionsController controller;
-  // final String local;
-  // final String description;
-  // final String text;
-  // final int quant;
-  // final String prefsName;
-  // final SharedPreferences prefs;
 
   final HomePageController controller;
   final dynamic Function() add;
@@ -28,9 +21,18 @@ class AddNewPeriod extends StatefulWidget {
 }
 
 class _PopUpOpinionsState extends State<AddNewPeriod> {
+  String textLabel = "Nomeie seu periodo";
+  String un1 = "un";
+  String un2 = "un";
   @override
   Widget build(BuildContext context) {
     return _buildAddProductsModal(context);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    widget.controller.inicialize();
   }
 
   _buildAddProductsModal(BuildContext context) {
@@ -48,10 +50,9 @@ class _PopUpOpinionsState extends State<AddNewPeriod> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 40.0),
+                        padding: const EdgeInsets.only(left: 60.0),
                         child: const Text(
                           "Novo Período",
                           style: TextStyle(
@@ -61,17 +62,22 @@ class _PopUpOpinionsState extends State<AddNewPeriod> {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 5.0),
-                        child: TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: Manrope(
-                              text: "X",
-                              size: 20,
-                              color: const Color.fromARGB(255, 188, 188, 188),
-                            )),
+                      Expanded(
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 5.0),
+                            child: TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Manrope(
+                                  text: "X",
+                                  size: 20,
+                                  color: const Color.fromARGB(255, 188, 188, 188),
+                                )),
+                          ),
+                        ),
                       )
                     ],
                   ),
@@ -83,7 +89,12 @@ class _PopUpOpinionsState extends State<AddNewPeriod> {
                         InputPersonalized(
                           validator: null,
                           controller: widget.controller.titleController,
-                          //labelText: "Nomeie seu periodo",
+                          labelText: textLabel,
+                          onChanged: (value) {
+                            setState(() {
+                              textLabel = '';
+                            });
+                          },
                           obscure: false,
                           height: 45,
                           width: (size.width / 1.74),
@@ -187,8 +198,8 @@ class _PopUpOpinionsState extends State<AddNewPeriod> {
                                 decoration: BoxDecoration(
                                   color: Color.fromARGB(252, 250, 247, 247),
                                   border: Border.symmetric(),
-                                  borderRadius:
-                                      const BorderRadius.all(Radius.circular(10)),
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(10)),
                                 ),
                                 child: Padding(
                                   padding: const EdgeInsets.only(left: 15.0),
@@ -200,9 +211,11 @@ class _PopUpOpinionsState extends State<AddNewPeriod> {
                                       return null;
                                     },
                                     onTap: (String? value) {
-                                      widget.controller.onSelectedEstado(value ?? "");
+                                      widget.controller
+                                          .onSelectedCategory(value ?? "");
                                     },
-                                    value: widget.controller.dropdownStateValue,
+                                    value:
+                                        widget.controller.dropdownCategoryValue,
                                     lists: widget.controller.categoria,
                                   ),
                                 ),
@@ -227,18 +240,24 @@ class _PopUpOpinionsState extends State<AddNewPeriod> {
                         ),
                         const SizedBox(width: 5),
                         InputPersonalized(
-                         keyboardType: TextInputType.number,
+                          keyboardType: TextInputType.number,
                           validator: null,
                           controller: widget.controller.meta1,
-                          //labelText: "Un",
+                          labelText: un1,
+                          onChanged: (value) {
+                            setState(() {
+                              un1 = '';
+                            });
+                          },
                           obscure: false,
                           height: 45,
                           width: 100,
                           inputFormatters: [
-                              FilteringTextInputFormatter.allow(RegExp('[0-9]')),
-                              LengthLimitingTextInputFormatter(7),
-                            ],
-                          borderRadius: const BorderRadius.all(Radius.circular(20)),
+                            FilteringTextInputFormatter.allow(RegExp('[0-9]')),
+                            LengthLimitingTextInputFormatter(7),
+                          ],
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(20)),
                         ),
                       ],
                     ),
@@ -257,18 +276,24 @@ class _PopUpOpinionsState extends State<AddNewPeriod> {
                         ),
                         const SizedBox(width: 5),
                         InputPersonalized(
-                         keyboardType: TextInputType.number,
+                          keyboardType: TextInputType.number,
                           validator: null,
                           controller: widget.controller.meta2,
-                          //labelText: "Un",
+                          labelText: un2,
+                          onChanged: (value) {
+                            setState(() {
+                              un2 = '';
+                            });
+                          },
                           obscure: false,
                           height: 45,
                           width: 100,
-                           inputFormatters: [
-                              FilteringTextInputFormatter.allow(RegExp('[0-9]')),
-                              LengthLimitingTextInputFormatter(7),
-                            ],
-                          borderRadius: const BorderRadius.all(Radius.circular(20)),
+                          inputFormatters: [
+                            FilteringTextInputFormatter.allow(RegExp('[0-9]')),
+                            LengthLimitingTextInputFormatter(7),
+                          ],
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(20)),
                         ),
                       ],
                     ),

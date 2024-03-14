@@ -9,7 +9,7 @@ class HomePageController extends ChangeNotifier {
   final TextEditingController meta2 = TextEditingController();
   late Database db;
   static const String tableName = 'notes';
-  String dropdownStateValue = "Categoria";
+  String dropdownCategoryValue = "Categoria";
   DateTime dateFinal = DateTime.now();
   DateTime dateInit = DateTime.now();
   List<String> categoria = [
@@ -23,8 +23,17 @@ class HomePageController extends ChangeNotifier {
   ];
   List<Period> notes = [];
 
-  onSelectedEstado(String estadoName) {
-    dropdownStateValue = estadoName;
+  inicialize() {
+    titleController.text = "";
+    meta1.text = "";
+    meta2.text = "";
+    dropdownCategoryValue = "Categoria";
+    dateInit = DateTime.now();
+    dateFinal = DateTime.now();
+  }
+
+  onSelectedCategory(String category) {
+    dropdownCategoryValue = category;
     notifyListeners();
   }
 

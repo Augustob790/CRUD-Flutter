@@ -26,8 +26,6 @@ class _NoteListScreenState extends State<NoteListScreen> {
   void initState() {
     super.initState();
     final controller = Provider.of<HomePageController>(context, listen: false);
-    controller.initializeInit(DateTime.now());
-    controller.initializeFinal(DateTime.now());
     controller.getAllNotes();
   }
 
@@ -55,68 +53,70 @@ class _NoteListScreenState extends State<NoteListScreen> {
           child: Consumer<HomePageController>(builder: (context, controller, child) {
             return Column(
               children: [
-                Row(
-                  children: [
-                    Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(right: 155.0),
-                          child: Manrope(
-                            text: "Apelido",
-                            color: Colors.black,
-                            font: FontWeight.w500,
-                            size: 12,
-                          ),
-                        ),
-                        Container(
-                          height: 30,
-                          width: 200,
-                          padding: EdgeInsets.all(8.0),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(
-                                color: Color.fromARGB(214, 187, 186, 186),
-                                width: 2),
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(5)),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Spacer(),
-                    Container(
-                      height: 60,
-                      width: 160,
-                      decoration: BoxDecoration(
-                        color: Color.fromARGB(140, 197, 197, 197),
-                        border: Border.all(
-                            color: Color.fromARGB(255, 251, 248, 248),
-                            width: 2),
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(10)),
-                      ),
-                      child: Row(
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Row(
+                    children: [
+                      Column(
                         children: [
                           Padding(
-                            padding: EdgeInsets.only(top: 5.0, bottom: 5.0, left: 5.0),
-                            child: CircleAvatar(
-                            radius: 30,
-                             backgroundImage: AssetImage(ImageConstant.imageNotFound),
+                            padding: const EdgeInsets.only(right: 155.0),
+                            child: Manrope(
+                              text: "Apelido",
+                              color: Colors.black,
+                              font: FontWeight.w500,
+                              size: 12,
                             ),
                           ),
-                          Manrope(
-                            text: "Editar Foto",
-                            color: Colors.black,
-                            font: FontWeight.w500,
-                            size: 14,
+                          Container(
+                            height: 30,
+                            width: 200,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              border: Border.all(
+                                  color: Color.fromARGB(214, 187, 186, 186),
+                                  width: 2),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(5)),
+                            ),
                           ),
                         ],
                       ),
-                    ),
-                  ],
+                      Spacer(),
+                      Container(
+                        height: 60,
+                        width: 160,
+                        decoration: BoxDecoration(
+                          color: Color.fromARGB(117, 197, 197, 197),
+                          border: Border.all(
+                              color: Color.fromARGB(255, 251, 248, 248),
+                              width: 2),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(10)),
+                        ),
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(top: 5.0, bottom: 5.0, left: 5.0),
+                              child: CircleAvatar(
+                              radius: 30,
+                               backgroundImage: AssetImage(ImageConstant.imageNotFound),
+                              ),
+                            ),
+                            Manrope(
+                              text: "Editar Foto",
+                              color: Colors.black,
+                              font: FontWeight.w500,
+                              size: 14,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 const Padding(
-                  padding: EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(10.0),
                   child: Divider(height: 15),
                 ),
                 Row(
@@ -133,10 +133,10 @@ class _NoteListScreenState extends State<NoteListScreen> {
                   ],
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: Container(
                   height: 300,
-                    padding: EdgeInsets.all(8.0),
+                    padding: EdgeInsets.all(10.0),
                     decoration: BoxDecoration(
                       color: Color.fromARGB(116, 236, 236, 237),
                       // border: Border.all(
@@ -149,7 +149,7 @@ class _NoteListScreenState extends State<NoteListScreen> {
                       itemBuilder: (context, index) {
                         final note = controller.notes[index];
                         return Padding(
-                          padding: const EdgeInsets.fromLTRB(8, 0, 8, 10),
+                          padding: const EdgeInsets.fromLTRB(8, 2, 8, 10),
                           child: Container(
                             height: 40,
                             decoration: BoxDecoration(
@@ -181,7 +181,7 @@ class _NoteListScreenState extends State<NoteListScreen> {
                                           editar: () async {
                                             Navigator.pop(context);
                                             controller.titleController.text = note.title;
-                                            controller.onSelectedEstado(note.category);
+                                            controller.onSelectedCategory(note.category);
                                             controller.dateFinal = DateTime.parse(note.dateFinal);
                                             controller.dateInit = DateTime.parse(note.dataInit);
                                             controller.meta1.text = note.meta1;
@@ -191,11 +191,11 @@ class _NoteListScreenState extends State<NoteListScreen> {
                                             builder: (context) => EditNewPeriod(
                                             controller: controller,
                                             add: () async {
-                                              if (controller.titleController.text.isNotEmpty && controller.dropdownStateValue.isNotEmpty) {
+                                              if (controller.titleController.text.isNotEmpty && controller.dropdownCategoryValue.isNotEmpty) {
                                                 await controller.update(Period(
                                                   id: note.id,
                                                   title: controller.titleController.text,
-                                                  category: controller.dropdownStateValue,
+                                                  category: controller.dropdownCategoryValue,
                                                   dataInit:  controller.dateInit.toIso8601String(),
                                                   dateFinal: controller.dateFinal.toIso8601String(),
                                                   meta1: controller.meta1.text,
@@ -204,9 +204,9 @@ class _NoteListScreenState extends State<NoteListScreen> {
                                               }
                                               controller.getAllNotes();
                                               Navigator.pop(context);
-                                            }));
+                                              }));
                                              },
-                                             ));
+                                          ));
                               },
                               child: ListTile(
                                 title: Padding(
@@ -246,23 +246,20 @@ class _NoteListScreenState extends State<NoteListScreen> {
                         height: 25,
                         width: 120,
                         onTap: () async {
-                          controller.titleController.clear();
+                          controller.inicialize();
+                          controller.dateInit = DateTime.now();
+                          controller.dateFinal = DateTime.now();
                           showDialog(
                               context: context,
                               builder: (context) => AddNewPeriod(
                                   controller: controller,
                                   add: () async {
-                                    if (controller
-                                            .titleController.text.isNotEmpty &&
-                                        controller
-                                            .dropdownStateValue.isNotEmpty) {
+                                    if (controller.titleController.text.isNotEmpty && controller.dropdownCategoryValue.isNotEmpty) {
                                       await controller.insert(Period(
                                         title: controller.titleController.text,
-                                        category: controller.dropdownStateValue,
-                                        dataInit:
-                                            controller.dateInit.toIso8601String(),
-                                        dateFinal: controller.dateFinal
-                                            .toIso8601String(),
+                                        category: controller.dropdownCategoryValue,
+                                        dataInit: controller.dateInit.toIso8601String(),
+                                        dateFinal: controller.dateFinal.toIso8601String(),
                                         meta1: controller.meta1.text,
                                         meta2: controller.meta2.text,
                                       ));
@@ -272,45 +269,44 @@ class _NoteListScreenState extends State<NoteListScreen> {
                                   }));
                         },
                         color: Color.fromARGB(247, 15, 40, 139),
-                        text: "Adicionar Pedido",
+                        text: "Adicionar Período",
                         size: 12.0,
                         isLoading: true,
                       ),
                     ],
                   ),
                 ),
-                Row(
-                  children:  [
-                    Padding(
-                      padding: EdgeInsets.all(10.0),
-                      child: CircleAvatar(
-                        radius: 40,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children:  [
+                      CircleAvatar(
+                        radius: 30,
                         backgroundImage: AssetImage(ImageConstant.imageNotFound),
                       ),
-                    ),
-                    Column(
-                      children: const [
-                        Manrope(
-                          text: "João",
-                          color: Color.fromARGB(247, 15, 40, 139),
-                          font: FontWeight.w600,
-                          size: 18,
+                      Padding(
+                        padding: const EdgeInsets.only(left:5.0),
+                        child: Column(
+                          children: const [
+                            Manrope(
+                              text: "João",
+                              color: Color.fromARGB(247, 15, 40, 139),
+                              font: FontWeight.w500,
+                              size: 18,
+                            ),
+                            Manrope(
+                              decoration: TextDecoration.underline,
+                              text: "Sair",
+                              color: Color.fromARGB(247, 15, 40, 139),
+                              font: FontWeight.w500,
+                              size: 15,
+                            ),
+                          ],
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(right: 10.0),
-                          child: Manrope(
-                            decoration: TextDecoration.underline,
-                            text: "Sair",
-                            color: Color.fromARGB(247, 15, 40, 139),
-                            font: FontWeight.w600,
-                            size: 15,
-                          ),
-                        ),
-                      ],
-                    )
-                  ],
+                      )
+                    ],
+                  ),
                 ),
-                SizedBox(height: 50),
               ],
             );
           }),
