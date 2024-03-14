@@ -17,7 +17,7 @@ class TopApp extends StatelessWidget {
                 text: "Apelido",
                 color: Colors.black,
                 font: FontWeight.w500,
-                size: 13,
+                size: 14,
               ),
               Container(
                 height: 30,
@@ -35,7 +35,7 @@ class TopApp extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           margin: const EdgeInsets.only(left: 30),
           decoration: BoxDecoration(
-            color: const Color.fromARGB(100, 240, 240, 240),
+            color: const Color.fromARGB(100, 225, 230, 230),
             border:
                 Border.all(color: const Color.fromARGB(255, 251, 248, 248), width: 2),
             borderRadius: const BorderRadius.all(Radius.circular(10)),
@@ -54,7 +54,7 @@ class TopApp extends StatelessWidget {
                 text: "Editar Foto",
                 color: Colors.black,
                 font: FontWeight.w500,
-                size: 13,
+                size: 14,
               ),
             ],
           ),

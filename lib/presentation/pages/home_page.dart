@@ -6,7 +6,7 @@ import 'add/add_modal_class.dart';
 import 'info/widget/info_modal_class.dart';
 import '../widgets/add_new_period.dart';
 import '../widgets/custom_exit.dart';
-import '../widgets/custom_listtile.dart';
+import '../widgets/custom_list_tile.dart';
 import '../widgets/manrope.dart';
 import '../controller/home_page_controller.dart';
 import '../widgets/top_app.dart';
@@ -75,7 +75,7 @@ class _NoteListScreenState extends State<NoteListScreen> {
                                 const BorderRadius.all(Radius.circular(15)),
                           ),
                           child: ListView.separated(
-                            padding: const EdgeInsets.fromLTRB(8, 2, 8, 10),
+                            padding: const EdgeInsets.fromLTRB(5, 5, 5, 10),
                             shrinkWrap: true,
                             itemCount: controller.periods.length,
                             itemBuilder: (context, index) {
