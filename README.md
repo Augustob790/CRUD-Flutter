@@ -1,16 +1,15 @@
-# crud_flutter
+# Teste Flutter
 
-A new Flutter project.
+App feito com o intuito de participar de um processo seletico para Desenvolvedor Flutter
 
-## Getting Started
+## Clonar este Repositorio
+$ git clone https://github.com/Augustob790/CRUD-Flutter
 
-This project is a starting point for a Flutter application.
+#### Acesse a pasta e no seu terminal, digite os comandos abaixo!
 
-A few resources to get you started if this is your first Flutter project:
+#### Instalar dependencias
+$ flutter pub get
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+#### Rodar o APP
+$ flutter run
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
