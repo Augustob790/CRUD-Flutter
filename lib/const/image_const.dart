@@ -1,3 +1,3 @@
 class ImageConstant {
-  static String imageNotFound = 'assets/img/img.png';
+  static String imageJoao = 'assets/img/img.png';
 }

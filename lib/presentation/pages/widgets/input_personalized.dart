@@ -90,9 +90,11 @@ class InputPersonalized extends StatelessWidget {
                         fontFamily: 'Nunito',
                         color: Color.fromARGB(255, 132, 132, 132),
                         fontSize: 15),
+                      counterText: "",
                   ),
                   validator: validator,
                   onChanged: onChanged,
+
                 ),
               ),
             ),

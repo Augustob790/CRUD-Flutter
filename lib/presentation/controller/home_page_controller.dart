@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 import '../../data/database_helper.dart';
-import '../../domain/model/ period.dart';
+import '../../domain/model/ period_model.dart';
 
 class HomePageController extends ChangeNotifier {
   final TextEditingController titleController = TextEditingController();
@@ -21,7 +21,7 @@ class HomePageController extends ChangeNotifier {
     'Categoria 5',
     'Categoria 6',
   ];
-  List<Period> notes = [];
+  List<Period> periods = [];
 
   inicialize() {
     titleController.text = "";
@@ -56,7 +56,7 @@ class HomePageController extends ChangeNotifier {
   getAllNotes() async {
     final db = await DB.instance.database;
     final List<Map<String, dynamic>> maps = await db!.query(tableName);
-    notes = List.generate(maps.length, (i) {
+    periods = List.generate(maps.length, (i) {
       return Period.fromMap(maps[i]);
     });
     notifyListeners();

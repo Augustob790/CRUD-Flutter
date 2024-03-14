@@ -40,11 +40,7 @@ class _InfoPeriodState extends State<InfoPeriod> {
 
   _buildAddProductsModal(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-    return AlertDialog(
-      scrollable: true,
-      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-      contentPadding: const EdgeInsets.all(0),
-      content: Column(
+    return Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -58,40 +54,39 @@ class _InfoPeriodState extends State<InfoPeriod> {
               ),
               borderRadius: const BorderRadius.all(Radius.circular(20)),
             ),
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.all(15),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 80.0),
-                      child: const Text(
-                        "Novo Período",
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color: Color.fromRGBO(46, 44, 52, 1),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Align(
-                        alignment: Alignment.centerRight,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                      flex: 3,
                         child: Padding(
-                          padding: const EdgeInsets.only(left: 5.0),
-                          child: IconButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            icon: Icon(Icons.close),
-                            color: Colors.grey,
+                          padding: const EdgeInsets.fromLTRB(50.0,0,0,0),
+                          child: Align(
+                          alignment: Alignment.center,
+                            child: const Text(
+                              "Novo Período",
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: Color.fromRGBO(46, 44, 52, 1),
+                              ),
+                            ),
                           ),
                         ),
                       ),
-                    )
-                  ],
-                ),
+                      IconButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        icon: Icon(Icons.close),
+                        color: Colors.grey,
+                      )
+                    ],
+                  ),
                 const SizedBox(height: 5),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -100,7 +95,7 @@ class _InfoPeriodState extends State<InfoPeriod> {
                       child: Container(
                         height: 45,
                         decoration: BoxDecoration(
-                          color: Color.fromARGB(27, 66, 66, 67),
+                           color: Color.fromARGB(45, 167, 167, 167),
                           border: Border.symmetric(),
                           borderRadius:
                               const BorderRadius.all(Radius.circular(5)),
@@ -120,29 +115,26 @@ class _InfoPeriodState extends State<InfoPeriod> {
                 ),
                 const SizedBox(height: 10),
                 Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     const SizedBox(height: 5),
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Manrope(
-                            text: "Começa",
-                            color: Color.fromARGB(255, 12, 11, 11),
-                            font: FontWeight.w500,
-                            size: 14,
-                          ),
-                          const SizedBox(width: 5),
-                          Manrope(
-                            text: Mask.formatDateForBR2(widget.dateInit),
-                            color: Color.fromARGB(255, 12, 11, 11),
-                            font: FontWeight.w400,
-                            size: 14,
-                          ),
-                        ],
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Manrope(
+                          text: "Começa",
+                          color: Color.fromARGB(255, 12, 11, 11),
+                          font: FontWeight.w500,
+                          size: 14,
+                        ),
+                        const SizedBox(width: 5),
+                        Manrope(
+                          text: Mask.formatDateForBR2(widget.dateInit),
+                          color: Color.fromARGB(255, 12, 11, 11),
+                          font: FontWeight.w400,
+                          size: 14,
+                        ),
+                      ],
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 2.0, right: 2.0),
@@ -234,13 +226,13 @@ class _InfoPeriodState extends State<InfoPeriod> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 25),
                 Padding(
                   padding: const EdgeInsets.symmetric(),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       CustomButtonStandard(
+                        margin: const EdgeInsets.only(top: 30, bottom: 30),
                         height: 35,
                         width: 100,
                         onTap: widget.excluir,
@@ -249,6 +241,7 @@ class _InfoPeriodState extends State<InfoPeriod> {
                         isLoading: true,
                       ),
                       CustomButtonStandard(
+                        margin: const EdgeInsets.only(top: 30, bottom: 30),
                         height: 35,
                         width: 100,
                         onTap: widget.editar,
@@ -263,7 +256,6 @@ class _InfoPeriodState extends State<InfoPeriod> {
             ),
           ),
         ],
-      ),
     );
   }
 }
