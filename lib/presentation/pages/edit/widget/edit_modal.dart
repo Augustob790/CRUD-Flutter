@@ -28,7 +28,7 @@ class _EditNewPeriodState extends State<EditNewPeriod> {
 
   _buildAddProductsModal(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-    return  Column(
+    return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -57,7 +57,7 @@ class _EditNewPeriodState extends State<EditNewPeriod> {
                         child: Align(
                           alignment: Alignment.center,
                           child: const Text(
-                            "Novo Período",
+                            "Editar Período",
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.w500,
@@ -102,118 +102,126 @@ class _EditNewPeriodState extends State<EditNewPeriod> {
                 const SizedBox(height: 10),
                 Container(
                   padding: EdgeInsets.all(5),
-                  height: 150,
+                  height: 200,
                   decoration: BoxDecoration(
-                    color:  Color.fromARGB(255, 245, 246, 250),
+                    color: Color.fromARGB(255, 245, 246, 250),
                     border: Border.symmetric(),
-                    borderRadius:
-                        const BorderRadius.all(Radius.circular(5)),
+                    borderRadius: const BorderRadius.all(Radius.circular(5)),
                   ),
                   child: Column(
                     children: [
                       const SizedBox(height: 5),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          const Manrope(
-                            text: "Começa",
-                            color: Color.fromARGB(255, 12, 11, 11),
-                            font: FontWeight.w500,
-                            size: 14,
-                          ),
-                          const SizedBox(width: 5),
-                          SizedBox(
-                            width: (size.width / 3.15),
-                            height: 30,
-                            child: CustomDateCalendar(
-                              date: widget.controller.dateInit,
-                              fontSize: 12,
-                              onChangedDate: (DateTime date) {
-                                setState(() {
-                                  widget.controller.initializeInit(date);
-                                });
-                              },
-                              positionedLeft: 65,
-                              positionedTop: 130,
-                            ),
-                          )
-                        ],
-                      ),
                       Padding(
-                        padding:
-                            const EdgeInsets.only(left: 17.0, right: 17.0),
-                        child: Divider(height: 10),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          const Manrope(
-                            text: "Termina",
-                            color: Color.fromARGB(255, 12, 11, 11),
-                            font: FontWeight.w500,
-                            size: 14,
-                          ),
-                          const SizedBox(width: 5),
-                          SizedBox(
+                        padding: const EdgeInsets.all(10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            const Manrope(
+                              text: "Começa",
+                              color: Color.fromARGB(255, 12, 11, 11),
+                              font: FontWeight.w500,
+                              size: 14,
+                            ),
+                            const SizedBox(width: 5),
+                            SizedBox(
                               width: (size.width / 3.15),
                               height: 30,
                               child: CustomDateCalendar(
-                                date: widget.controller.dateFinal,
+                                date: widget.controller.dateInit,
                                 fontSize: 12,
                                 onChangedDate: (DateTime date) {
                                   setState(() {
-                                    widget.controller.initializeFinal(date);
+                                    widget.controller.initializeInit(date);
                                   });
                                 },
                                 positionedLeft: 65,
                                 positionedTop: 130,
-                              )),
-                        ],
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                       Padding(
-                        padding:
-                            const EdgeInsets.only(left: 17.0, right: 17.0),
+                        padding: const EdgeInsets.only(left: 17.0, right: 17.0),
                         child: Divider(height: 10),
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          const Manrope(
-                            text: "Categoria",
-                            color: Color.fromARGB(255, 12, 11, 11),
-                            font: FontWeight.w500,
-                            size: 14,
-                          ),
-                          const SizedBox(width: 5),
-                          Container(
-                            height: 45,
-                            width: (size.width / 3.15),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              border: Border.symmetric(),
-                              borderRadius: const BorderRadius.all(
-                                  Radius.circular(10)),
+                      Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            const Manrope(
+                              text: "Termina",
+                              color: Color.fromARGB(255, 12, 11, 11),
+                              font: FontWeight.w500,
+                              size: 14,
                             ),
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 15.0),
-                              child: DropdownButtonForm(
-                                validator: (String? value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Selecione a categoria';
-                                  }
-                                  return null;
-                                },
-                                onTap: (String? value) {
-                                  widget.controller
-                                      .onSelectedCategory(value ?? "");
-                                },
-                                value:
-                                    widget.controller.dropdownCategoryValue,
-                                lists: widget.controller.categoria,
+                            const SizedBox(width: 5),
+                            SizedBox(
+                                width: (size.width / 3.15),
+                                height: 30,
+                                child: CustomDateCalendar(
+                                  date: widget.controller.dateFinal,
+                                  fontSize: 12,
+                                  onChangedDate: (DateTime date) {
+                                    setState(() {
+                                      widget.controller.initializeFinal(date);
+                                    });
+                                  },
+                                  positionedLeft: 65,
+                                  positionedTop: 130,
+                                )),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 17.0, right: 17.0),
+                        child: Divider(height: 10),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            const Manrope(
+                              text: "Categoria",
+                              color: Color.fromARGB(255, 12, 11, 11),
+                              font: FontWeight.w500,
+                              size: 14,
+                            ),
+                            const SizedBox(width: 5),
+                            Container(
+                              height: 45,
+                              width: (size.width / 3.15),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                border: Border.all(
+                                    color:
+                                        const Color.fromARGB(159, 205, 205, 205),
+                                    width: 1),
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(10)),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 15.0),
+                                child: DropdownButtonForm(
+                                  validator: (String? value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Selecione a categoria';
+                                    }
+                                    return null;
+                                  },
+                                  onTap: (String? value) {
+                                    widget.controller
+                                        .onSelectedCategory(value ?? "");
+                                  },
+                                  value: widget.controller.dropdownCategoryValue,
+                                  lists: widget.controller.categoria,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -247,8 +255,10 @@ class _EditNewPeriodState extends State<EditNewPeriod> {
                         FilteringTextInputFormatter.allow(RegExp('[0-9]')),
                         LengthLimitingTextInputFormatter(7),
                       ],
-                      borderRadius:
-                          const BorderRadius.all(Radius.circular(20)),
+                      borderRadius: const BorderRadius.all(Radius.circular(20)),
+                      border: Border.all(
+                          color: const Color.fromARGB(159, 205, 205, 205),
+                          width: 1),
                     ),
                   ],
                 ),
@@ -281,8 +291,10 @@ class _EditNewPeriodState extends State<EditNewPeriod> {
                         FilteringTextInputFormatter.allow(RegExp('[0-9]')),
                         LengthLimitingTextInputFormatter(7),
                       ],
-                      borderRadius:
-                          const BorderRadius.all(Radius.circular(20)),
+                      borderRadius: const BorderRadius.all(Radius.circular(20)),
+                      border: Border.all(
+                          color: const Color.fromARGB(159, 205, 205, 205),
+                          width: 1),
                     ),
                   ],
                 ),

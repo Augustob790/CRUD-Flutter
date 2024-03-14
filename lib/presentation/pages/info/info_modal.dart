@@ -68,7 +68,7 @@ class _InfoPeriodState extends State<InfoPeriod> {
                           child: Align(
                           alignment: Alignment.center,
                             child: const Text(
-                              "Novo Período",
+                              "Período",
                               style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w500,

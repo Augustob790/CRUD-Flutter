@@ -14,9 +14,9 @@ class DropdownButtonForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return DropdownButtonFormField<String>(
       validator: validator,
-      icon: const Icon(
+      icon:  const Icon(
         Icons.keyboard_arrow_down,
-        color: Colors.black,
+        color: Color.fromARGB(143, 157, 157, 157),
       ),
       decoration: const InputDecoration(border: InputBorder.none),
       value: initialValue ?? value,

@@ -20,8 +20,8 @@ class InputPersonalized extends StatelessWidget {
     this.inputFormatters,
     this.onChanged,
     this.obscureText = false,
-    this.height = 60.0, 
-    this.borderRadius = const BorderRadius.all(Radius.circular(5)),
+    this.height = 60.0,
+    this.borderRadius = const BorderRadius.all(Radius.circular(5)), this.border,
   });
   final Widget? image;
   final double height;
@@ -38,6 +38,7 @@ class InputPersonalized extends StatelessWidget {
   final TextInputType? keyboardType;
   final int? maxLength;
   final BorderRadiusGeometry? borderRadius;
+  final BoxBorder? border;
   final List<TextInputFormatter>? inputFormatters;
   final Function(String)? onChanged;
 
@@ -48,8 +49,7 @@ class InputPersonalized extends StatelessWidget {
       width: width,
       decoration: BoxDecoration(
         color: const Color.fromARGB(255, 245, 246, 250),
-        border: Border.all(
-            color: const Color.fromARGB(159, 205, 205, 205), width: 1),
+        border: border,
         borderRadius: borderRadius,
       ),
       child: Padding(
@@ -90,11 +90,10 @@ class InputPersonalized extends StatelessWidget {
                         fontFamily: 'Nunito',
                         color: Color.fromARGB(255, 132, 132, 132),
                         fontSize: 15),
-                      counterText: "",
+                    counterText: "",
                   ),
                   validator: validator,
                   onChanged: onChanged,
-
                 ),
               ),
             ),
