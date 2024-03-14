@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
     return DependecyInjectionsProvider(
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'SQLite CRUD',
+        title: 'CRUD - Teste',
         theme: ThemeData(
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
