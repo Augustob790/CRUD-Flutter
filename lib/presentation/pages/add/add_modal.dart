@@ -40,20 +40,30 @@ class _PopUpOpinionsState extends State<AddNewPeriod> {
     return AlertDialog(
       scrollable: true,
       backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+      contentPadding: const EdgeInsets.all(0),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            padding: const EdgeInsets.symmetric(),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 80.0),
-                      child: const Text(
+            width: size.width,
+            decoration: BoxDecoration(
+              color: Color.fromARGB(255, 255, 255, 255),
+              border: Border.all(
+                color: Color.fromARGB(180, 205, 205, 205),
+                width: 1,
+              ),
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
                         "Novo Período",
                         style: TextStyle(
                           fontSize: 15,
@@ -61,12 +71,9 @@ class _PopUpOpinionsState extends State<AddNewPeriod> {
                           color: Color.fromRGBO(46, 44, 52, 1),
                         ),
                       ),
-                    ),
-                    Expanded(
-                      child: Align(
-                        alignment: Alignment.topRight,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 10.0),
+                      Expanded(
+                        child: Align(
+                          alignment: Alignment.topRight,
                           child: IconButton(
                             onPressed: () {
                               Navigator.of(context).pop();
@@ -75,42 +82,42 @@ class _PopUpOpinionsState extends State<AddNewPeriod> {
                             color: Colors.grey,
                           ),
                         ),
-                      ),
-                    )
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    InputPersonalized(
-                      validator: null,
-                      controller: widget.controller.titleController,
-                      labelText: textLabel,
-                      onChanged: (value) {
-                        setState(() {
-                          textLabel = '';
-                        });
-                      },
-                      obscure: false,
-                      height: 45,
-                      width: (size.width / 1.55),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10),
-                Container(
-                  height: 165,
-                  decoration: BoxDecoration(
-                    color: Color.fromARGB(27, 66, 66, 67),
-                    border: Border.symmetric(),
-                    borderRadius: const BorderRadius.all(Radius.circular(5)),
+                      )
+                    ],
                   ),
-                  child: Column(
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      const SizedBox(height: 5),
-                      Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Row(
+                      Expanded(
+                        child: InputPersonalized(
+                          validator: null,
+                          controller: widget.controller.titleController,
+                          labelText: textLabel,
+                          onChanged: (value) {
+                            setState(() {
+                              textLabel = '';
+                            });
+                          },
+                          obscure: false,
+                          height: 45,
+                          width: (size.width / 1.55),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  Container(
+                    padding: EdgeInsets.all(5),
+                    height: 150,
+                    decoration: BoxDecoration(
+                      color: Color.fromARGB(27, 66, 66, 67),
+                      border: Border.symmetric(),
+                      borderRadius: const BorderRadius.all(Radius.circular(5)),
+                    ),
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 5),
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             const Manrope(
@@ -121,7 +128,7 @@ class _PopUpOpinionsState extends State<AddNewPeriod> {
                             ),
                             const SizedBox(width: 5),
                             SizedBox(
-                              width: 120,
+                              width: (size.width / 3.15),
                               height: 30,
                               child: CustomDateCalendar(
                                 date: widget.controller.dateInit,
@@ -137,14 +144,8 @@ class _PopUpOpinionsState extends State<AddNewPeriod> {
                             )
                           ],
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                        child: Divider(height: 10),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Row(
+                        Divider(height: 10),
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             const Manrope(
@@ -155,7 +156,7 @@ class _PopUpOpinionsState extends State<AddNewPeriod> {
                             ),
                             const SizedBox(width: 5),
                             SizedBox(
-                                width: 120,
+                                width: (size.width / 3.15),
                                 height: 30,
                                 child: CustomDateCalendar(
                                   date: widget.controller.dateFinal,
@@ -170,14 +171,8 @@ class _PopUpOpinionsState extends State<AddNewPeriod> {
                                 )),
                           ],
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                        child: Divider(height: 10),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Row(
+                        Divider(height: 10),
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             const Manrope(
@@ -189,7 +184,7 @@ class _PopUpOpinionsState extends State<AddNewPeriod> {
                             const SizedBox(width: 5),
                             Container(
                               height: 45,
-                              width: 120,
+                              width: (size.width / 3.15),
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 border: Border.symmetric(),
@@ -217,15 +212,12 @@ class _PopUpOpinionsState extends State<AddNewPeriod> {
                             ),
                           ],
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                const SizedBox(height: 10),
-                Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  const SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       const Manrope(
                         text: "Meta 1",
@@ -246,7 +238,7 @@ class _PopUpOpinionsState extends State<AddNewPeriod> {
                         },
                         obscure: false,
                         height: 45,
-                        width: 100,
+                        width: (size.width / 4),
                         inputFormatters: [
                           FilteringTextInputFormatter.allow(RegExp('[0-9]')),
                           LengthLimitingTextInputFormatter(7),
@@ -256,12 +248,9 @@ class _PopUpOpinionsState extends State<AddNewPeriod> {
                       ),
                     ],
                   ),
-                ),
-                const SizedBox(height: 5),
-                Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  const SizedBox(height: 5),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       const Manrope(
                         text: "Meta 2",
@@ -282,7 +271,7 @@ class _PopUpOpinionsState extends State<AddNewPeriod> {
                         },
                         obscure: false,
                         height: 45,
-                        width: 100,
+                        width: (size.width / 4),
                         inputFormatters: [
                           FilteringTextInputFormatter.allow(RegExp('[0-9]')),
                           LengthLimitingTextInputFormatter(7),
@@ -292,25 +281,18 @@ class _PopUpOpinionsState extends State<AddNewPeriod> {
                       ),
                     ],
                   ),
-                ),
-                const SizedBox(height: 20),
-                Padding(
-                  padding: const EdgeInsets.symmetric(),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CustomButtonStandard(
-                        height: 35,
-                        width: 100,
-                        onTap: widget.add,
-                        color: Color.fromARGB(247, 15, 40, 139),
-                        text: "Concluir",
-                        isLoading: true,
-                      ),
-                    ],
+                  const SizedBox(height: 20),
+                  CustomButtonStandard(
+                    margin: const EdgeInsets.only(top: 30, bottom: 30),
+                    height: 35,
+                    width: 100,
+                    onTap: widget.add,
+                    color: Color.fromARGB(247, 15, 40, 139),
+                    text: "Concluir",
+                    isLoading: true,
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ],

@@ -49,7 +49,7 @@ class _InfoPeriodState extends State<InfoPeriod> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-          width: size.width,
+            width: size.width,
             decoration: BoxDecoration(
               color: Color.fromARGB(255, 255, 255, 255),
               border: Border.all(
