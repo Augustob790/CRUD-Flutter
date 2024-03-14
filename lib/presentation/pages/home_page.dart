@@ -66,10 +66,11 @@ class _NoteListScreenState extends State<NoteListScreen> {
                       ),
                       Flexible(
                         child: Container(
+                        height: 350,
                           margin: EdgeInsets.only(top: 10),
                           padding: EdgeInsets.all(10.0),
                           decoration: BoxDecoration(
-                            color: Color.fromARGB(116, 236, 236, 237),
+                            color: Color.fromARGB(255, 245, 246, 250),
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(15)),
                           ),
@@ -79,33 +80,19 @@ class _NoteListScreenState extends State<NoteListScreen> {
                             itemCount: controller.periods.length,
                             itemBuilder: (context, index) {
                               final periods = controller.periods[index];
-                              return Container(
-                                height: 45,
-                                decoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 255, 255, 255),
-                                  border: Border.all(
-                                    color: Color.fromARGB(180, 205, 205, 205),
-                                    width: 1,
-                                  ),
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(5)),
-                                ),
-                                child: InkWell(
-                                  onTap: () async {
-                                    controller.titleController.text =
-                                        periods.title;
-                                    InfoNewPeriodClass().init(
-                                      context: context,
-                                      controller: controller,
-                                      period: periods,
-                                    );
-                                  },
-                                  child: CustomListTile(period: periods),
-                                ),
+                              return CustomListTile(
+                                period: periods,
+                                onTap: () async {
+                                  controller.titleController.text = periods.title;
+                                  InfoNewPeriodClass().init(
+                                    context: context,
+                                    controller: controller,
+                                    period: periods,
+                                  );
+                                },
                               );
                             },
-                            separatorBuilder:
-                                (BuildContext context, int index) {
+                            separatorBuilder: (BuildContext context, int index) {
                               return SizedBox(height: 10);
                             },
                           ),

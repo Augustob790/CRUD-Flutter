@@ -47,7 +47,7 @@ class InputPersonalized extends StatelessWidget {
       height: height,
       width: width,
       decoration: BoxDecoration(
-        color: const Color.fromARGB(14, 167, 167, 167),
+        color: const Color.fromARGB(255, 245, 246, 250),
         border: Border.all(
             color: const Color.fromARGB(159, 205, 205, 205), width: 1),
         borderRadius: borderRadius,

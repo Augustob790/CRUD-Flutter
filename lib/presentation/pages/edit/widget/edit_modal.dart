@@ -104,7 +104,7 @@ class _EditNewPeriodState extends State<EditNewPeriod> {
                   padding: EdgeInsets.all(5),
                   height: 150,
                   decoration: BoxDecoration(
-                    color: Color.fromARGB(27, 66, 66, 67),
+                    color:  Color.fromARGB(255, 245, 246, 250),
                     border: Border.symmetric(),
                     borderRadius:
                         const BorderRadius.all(Radius.circular(5)),

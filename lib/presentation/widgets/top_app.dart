@@ -35,7 +35,7 @@ class TopApp extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           margin: const EdgeInsets.only(left: 30),
           decoration: BoxDecoration(
-            color: const Color.fromARGB(117, 197, 197, 197),
+            color: const Color.fromARGB(100, 240, 240, 240),
             border:
                 Border.all(color: const Color.fromARGB(255, 251, 248, 248), width: 2),
             borderRadius: const BorderRadius.all(Radius.circular(10)),

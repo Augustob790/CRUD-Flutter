@@ -54,7 +54,7 @@ class _InfoPeriodState extends State<InfoPeriod> {
               ),
               borderRadius: const BorderRadius.all(Radius.circular(20)),
             ),
-            padding: const EdgeInsets.all(15),
+            padding: const EdgeInsets.all(25),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -95,7 +95,7 @@ class _InfoPeriodState extends State<InfoPeriod> {
                       child: Container(
                         height: 45,
                         decoration: BoxDecoration(
-                           color: Color.fromARGB(45, 167, 167, 167),
+                           color:  Color.fromARGB(255, 245, 246, 250),
                           border: Border.symmetric(),
                           borderRadius:
                               const BorderRadius.all(Radius.circular(5)),
@@ -226,31 +226,28 @@ class _InfoPeriodState extends State<InfoPeriod> {
                     ),
                   ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      CustomButtonStandard(
-                        margin: const EdgeInsets.only(top: 30, bottom: 30),
-                        height: 35,
-                        width: 100,
-                        onTap: widget.excluir,
-                        color: Color.fromARGB(255, 255, 0, 0),
-                        text: "Excluir",
-                        isLoading: true,
-                      ),
-                      CustomButtonStandard(
-                        margin: const EdgeInsets.only(top: 30, bottom: 30),
-                        height: 35,
-                        width: 100,
-                        onTap: widget.editar,
-                        color: Color.fromARGB(247, 15, 40, 139),
-                        text: "Editar",
-                        isLoading: true,
-                      ),
-                    ],
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CustomButtonStandard(
+                      margin: const EdgeInsets.only(top: 30, bottom: 30),
+                      height: 35,
+                      width: 100,
+                      onTap: widget.excluir,
+                      color: Color.fromARGB(255, 255, 0, 0),
+                      text: "Excluir",
+                      isLoading: true,
+                    ),
+                    CustomButtonStandard(
+                      margin: const EdgeInsets.only(top: 30, bottom: 30),
+                      height: 35,
+                      width: 100,
+                      onTap: widget.editar,
+                      color: Color.fromARGB(247, 15, 40, 139),
+                      text: "Editar",
+                      isLoading: true,
+                    ),
+                  ],
                 ),
               ],
             ),
