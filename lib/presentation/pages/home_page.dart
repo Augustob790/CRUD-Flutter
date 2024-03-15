@@ -39,7 +39,7 @@ class _NoteListScreenState extends State<NoteListScreen> {
           text: "Configurações",
           color: Color.fromARGB(255, 12, 11, 11),
           font: FontWeight.w500,
-          size: 22,
+          size: 24,
         ),
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),
