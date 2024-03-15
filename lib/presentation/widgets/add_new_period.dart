@@ -16,11 +16,11 @@ class AddNewPeriodButton extends StatelessWidget {
       alignment: Alignment.centerRight,
       child: CustomButtonStandard(
         height: 25,
-        width: 120,
+        width: 125,
         onTap: onTap,
         color: const Color.fromARGB(247, 15, 40, 139),
         text: "Adicionar Período",
-        size: 12.0,
+        size: 12,
         isLoading: true,
       ),
     );

@@ -49,7 +49,7 @@ class _PopUpOpinionsState extends State<AddNewPeriod> {
             borderRadius: const BorderRadius.all(Radius.circular(20)),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(15),
+            padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -62,13 +62,11 @@ class _PopUpOpinionsState extends State<AddNewPeriod> {
                         padding: const EdgeInsets.fromLTRB(50.0, 0, 0, 0),
                         child: Align(
                           alignment: Alignment.center,
-                          child: const Text(
-                            "Novo Período",
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: Color.fromRGBO(46, 44, 52, 1),
-                            ),
+                          child: const Manrope(
+                            text: "Novo Período",
+                            color: Color.fromRGBO(46, 44, 52, 1),
+                            size: 15,
+                            font: FontWeight.w500,
                           ),
                         ),
                       ),
@@ -95,6 +93,7 @@ class _PopUpOpinionsState extends State<AddNewPeriod> {
                           }
                           return null;
                         },
+                        fontSize: 15,
                         controller: widget.controller.titleController,
                         labelText: "Nomeie seu período",
                         obscure: false,
@@ -125,7 +124,7 @@ class _PopUpOpinionsState extends State<AddNewPeriod> {
                               text: "Começa",
                               color: Color.fromARGB(255, 12, 11, 11),
                               font: FontWeight.w500,
-                              size: 14,
+                              size: 15,
                             ),
                             const SizedBox(width: 5),
                             SizedBox(
@@ -140,7 +139,7 @@ class _PopUpOpinionsState extends State<AddNewPeriod> {
                                   });
                                 },
                                 positionedLeft: 65,
-                                positionedTop: 130,
+                                positionedTop: 150,
                               ),
                             )
                           ],
@@ -159,7 +158,7 @@ class _PopUpOpinionsState extends State<AddNewPeriod> {
                               text: "Termina",
                               color: Color.fromARGB(255, 12, 11, 11),
                               font: FontWeight.w500,
-                              size: 14,
+                              size: 15,
                             ),
                             const SizedBox(width: 5),
                             SizedBox(
@@ -174,7 +173,7 @@ class _PopUpOpinionsState extends State<AddNewPeriod> {
                                     });
                                   },
                                   positionedLeft: 65,
-                                  positionedTop: 130,
+                                  positionedTop: 150,
                                 )),
                             //Divider(height: 10),
                           ],
@@ -193,7 +192,7 @@ class _PopUpOpinionsState extends State<AddNewPeriod> {
                               text: "Categoria",
                               color: Color.fromARGB(255, 12, 11, 11),
                               font: FontWeight.w500,
-                              size: 14,
+                              size: 15,
                             ),
                             const SizedBox(width: 5),
                             Container(
@@ -202,8 +201,8 @@ class _PopUpOpinionsState extends State<AddNewPeriod> {
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 border: Border.all(
-                                    color:
-                                        const Color.fromARGB(159, 205, 205, 205),
+                                    color: const Color.fromARGB(
+                                        159, 205, 205, 205),
                                     width: 1),
                                 borderRadius:
                                     const BorderRadius.all(Radius.circular(10)),
@@ -221,7 +220,8 @@ class _PopUpOpinionsState extends State<AddNewPeriod> {
                                     widget.controller
                                         .onSelectedCategory(value ?? "");
                                   },
-                                  value: widget.controller.dropdownCategoryValue,
+                                  value:
+                                      widget.controller.dropdownCategoryValue,
                                   lists: widget.controller.categoria,
                                 ),
                               ),
@@ -240,7 +240,7 @@ class _PopUpOpinionsState extends State<AddNewPeriod> {
                       text: "Meta 1",
                       color: Color.fromARGB(255, 12, 11, 11),
                       font: FontWeight.w500,
-                      size: 14,
+                      size: 15,
                     ),
                     const SizedBox(width: 5),
                     InputPersonalized(
@@ -252,16 +252,17 @@ class _PopUpOpinionsState extends State<AddNewPeriod> {
                         }
                         return null;
                       },
+                      fontSize: 12,
                       controller: widget.controller.meta1,
                       labelText: "un",
                       obscure: false,
                       height: 45,
-                      width: (size.width / 3.5),
+                      width: (size.width / 4),
                       inputFormatters: [
                         FilteringTextInputFormatter.allow(RegExp('[0-9]')),
                         LengthLimitingTextInputFormatter(7),
                       ],
-                      borderRadius: const BorderRadius.all(Radius.circular(20)),
+                      borderRadius: const BorderRadius.all(Radius.circular(10)),
                       border: Border.all(
                           color: const Color.fromARGB(159, 205, 205, 205),
                           width: 1),
@@ -276,7 +277,7 @@ class _PopUpOpinionsState extends State<AddNewPeriod> {
                       text: "Meta 2",
                       color: Color.fromARGB(255, 12, 11, 11),
                       font: FontWeight.w500,
-                      size: 14,
+                      size: 15,
                     ),
                     const SizedBox(width: 5),
                     InputPersonalized(
@@ -289,15 +290,16 @@ class _PopUpOpinionsState extends State<AddNewPeriod> {
                         return null;
                       },
                       controller: widget.controller.meta2,
+                      fontSize: 12,
                       labelText: "un",
                       obscure: false,
                       height: 45,
-                      width: (size.width / 3.5),
+                      width: (size.width / 4),
                       inputFormatters: [
                         FilteringTextInputFormatter.allow(RegExp('[0-9]')),
                         LengthLimitingTextInputFormatter(7),
                       ],
-                      borderRadius: const BorderRadius.all(Radius.circular(20)),
+                      borderRadius: const BorderRadius.all(Radius.circular(10)),
                       border: Border.all(
                           color: const Color.fromARGB(159, 205, 205, 205),
                           width: 1),
@@ -306,11 +308,12 @@ class _PopUpOpinionsState extends State<AddNewPeriod> {
                 ),
                 CustomButtonStandard(
                   margin: const EdgeInsets.only(top: 30, bottom: 30),
-                  height: 35,
-                  width: 100,
+                  height: 30,
+                  width: 90,
                   onTap: widget.add,
                   color: Color.fromARGB(247, 15, 40, 139),
                   text: "Concluir",
+                  size: 15,
                   isLoading: true,
                 ),
               ],

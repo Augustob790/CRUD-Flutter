@@ -21,11 +21,13 @@ class InputPersonalized extends StatelessWidget {
     this.onChanged,
     this.obscureText = false,
     this.height = 60.0,
-    this.borderRadius = const BorderRadius.all(Radius.circular(5)), this.border,
+    this.borderRadius = const BorderRadius.all(Radius.circular(5)),
+    this.border, required this.fontSize,
   });
   final Widget? image;
   final double height;
   final double width;
+  final double fontSize;
   final Function()? onTap;
   final Function()? onEditingComplete;
   final bool obscure;
@@ -71,11 +73,11 @@ class InputPersonalized extends StatelessWidget {
                   obscureText: obscureText,
                   autovalidateMode: autovalidateMode,
                   controller: controller,
-                  style: const TextStyle(
-                      fontFamily: 'Nunito',
-                      color: Color.fromARGB(255, 8, 1, 1),
+                  style: TextStyle(
+                      fontFamily: 'Manrope',
+                      color: const Color.fromARGB(255, 8, 1, 1),
                       fontWeight: FontWeight.w400,
-                      fontSize: 14),
+                      fontSize: fontSize),
                   inputFormatters: inputFormatters,
                   onEditingComplete: onEditingComplete,
                   decoration: InputDecoration(
@@ -86,10 +88,10 @@ class InputPersonalized extends StatelessWidget {
                     disabledBorder: InputBorder.none,
                     hintText: hintText,
                     labelText: labelText,
-                    labelStyle: const TextStyle(
+                    labelStyle:  TextStyle(
                         fontFamily: 'Nunito',
-                        color: Color.fromARGB(255, 132, 132, 132),
-                        fontSize: 15),
+                        color: const Color.fromARGB(255, 132, 132, 132),
+                        fontSize: fontSize),
                     counterText: "",
                   ),
                   validator: validator,

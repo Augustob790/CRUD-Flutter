@@ -17,7 +17,7 @@ class TopApp extends StatelessWidget {
                 text: "Apelido",
                 color: Colors.black,
                 font: FontWeight.w500,
-                size: 14,
+                size: 13,
               ),
               Container(
                 height: 30,
@@ -54,7 +54,7 @@ class TopApp extends StatelessWidget {
                 text: "Editar Foto",
                 color: Colors.black,
                 font: FontWeight.w500,
-                size: 14,
+                size: 13,
               ),
             ],
           ),

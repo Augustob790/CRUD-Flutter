@@ -28,7 +28,7 @@ class DropdownButtonForm extends StatelessWidget {
             text: value,
             color: Colors.black,
             font: FontWeight.w400,
-            size: 13,
+            size: 12,
           ),
         );
       }).toList(),

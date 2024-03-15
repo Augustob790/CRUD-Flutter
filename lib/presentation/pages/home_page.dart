@@ -58,15 +58,18 @@ class _NoteListScreenState extends State<NoteListScreen> {
                     children: [
                       TopApp(),
                       Divider(height: 40),
-                      Manrope(
-                        text: "Períodos",
-                        color: Color.fromARGB(255, 12, 11, 11),
-                        font: FontWeight.w500,
-                        size: 18,
+                      Padding(
+                        padding: const EdgeInsets.only(top:5, bottom: 12),
+                        child: Manrope(
+                          text: "Períodos",
+                          color: Color.fromARGB(255, 12, 11, 11),
+                          font: FontWeight.w500,
+                          size: 17,
+                        ),
                       ),
                       Flexible(
                         child: Container(
-                        height: 350,
+                        height: 330,
                           margin: EdgeInsets.only(top: 10),
                           padding: EdgeInsets.all(10.0),
                           decoration: BoxDecoration(
