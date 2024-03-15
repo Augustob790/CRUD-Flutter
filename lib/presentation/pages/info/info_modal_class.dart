@@ -1,10 +1,10 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import '../../../../domain/model/ period_model.dart';
-import '../../../controller/home_page_controller.dart';
-import '../../edit/edit_modal_class.dart';
-import '../info_modal.dart';
+import '../../../domain/model/ period_model.dart';
+import '../../controller/home_page_controller.dart';
+import '../edit/edit_modal_class.dart';
+import 'widget/info_modal.dart';
 
 class InfoNewPeriodClass {
   init({

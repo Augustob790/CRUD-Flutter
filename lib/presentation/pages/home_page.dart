@@ -2,8 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../widgets/custom_container.dart';
+import '../widgets/text_home_page.dart';
 import 'add/add_modal_class.dart';
-import 'info/widget/info_modal_class.dart';
+import 'info/info_modal_class.dart';
 import '../widgets/add_new_period.dart';
 import '../widgets/custom_exit.dart';
 import '../widgets/custom_list_tile.dart';
@@ -31,7 +33,6 @@ class _NoteListScreenState extends State<NoteListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -39,7 +40,7 @@ class _NoteListScreenState extends State<NoteListScreen> {
           text: "Configurações",
           color: Color.fromARGB(255, 12, 11, 11),
           font: FontWeight.w500,
-          size: 24,
+          size: 22,
         ),
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),
@@ -58,57 +59,39 @@ class _NoteListScreenState extends State<NoteListScreen> {
                     children: [
                       TopApp(),
                       Divider(height: 40),
-                      Padding(
-                        padding: const EdgeInsets.only(top:5, bottom: 12),
-                        child: Manrope(
-                          text: "Períodos",
-                          color: Color.fromARGB(255, 12, 11, 11),
-                          font: FontWeight.w500,
-                          size: 17,
-                        ),
-                      ),
-                      Flexible(
-                        child: Container(
+                      TextHomePage(text: "Períodos"),
+                      CustomContainerHomePage(
                         height: 330,
-                          margin: EdgeInsets.only(top: 10),
-                          padding: EdgeInsets.all(10.0),
-                          decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 245, 246, 250),
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(15)),
-                          ),
-                          child: ListView.separated(
-                            padding: const EdgeInsets.fromLTRB(5, 5, 5, 10),
-                            shrinkWrap: true,
-                            itemCount: controller.periods.length,
-                            itemBuilder: (context, index) {
-                              final periods = controller.periods[index];
-                              return CustomListTile(
-                                period: periods,
-                                onTap: () async {
-                                  controller.titleController.text = periods.title;
-                                  InfoNewPeriodClass().init(
-                                    context: context,
-                                    controller: controller,
-                                    period: periods,
-                                  );
-                                },
-                              );
-                            },
-                            separatorBuilder: (BuildContext context, int index) {
-                              return SizedBox(height: 10);
-                            },
-                          ),
+                        child: ListView.separated(
+                          padding: const EdgeInsets.fromLTRB(5, 5, 5, 10),
+                          shrinkWrap: true,
+                          itemCount: controller.periods.length,
+                          itemBuilder: (context, index) {
+                            final periods = controller.periods[index];
+                            return CustomListTile(
+                              period: periods,
+                              onTap: () async {
+                                controller.titleController.text = periods.title;
+                                InfoNewPeriodClass().init(
+                                  context: context,
+                                  controller: controller,
+                                  period: periods,
+                                );
+                              },
+                            );
+                          },
+                          separatorBuilder: (BuildContext context, int index) {
+                            return SizedBox(height: 10);
+                          },
                         ),
                       ),
                       SizedBox(height: 12),
                       AddNewPeriodButton(
+                        controller: controller,
                         onTap: () async {
                           controller.inicialize();
-                          AddNewPeriodClass()
-                              .init(context: context, controller: controller);
+                          AddNewPeriodClass().init(context: context, controller: controller);
                         },
-                        controller: controller,
                       ),
                       SizedBox(height: 20),
                     ],

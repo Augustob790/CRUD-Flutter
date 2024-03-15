@@ -66,11 +66,13 @@ class _EditNewPeriodState extends State<EditNewPeriod> {
                       ),
                     ),
                     IconButton(
+                      iconSize: 30,
+                      alignment: Alignment.topRight,
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
                       icon: Icon(Icons.close),
-                      color: Colors.grey,
+                      color: Color.fromARGB(231, 217, 217, 217),
                     )
                   ],
                 ),

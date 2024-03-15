@@ -3,9 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:crud_flutter/presentation/helpers/helpers.dart';
 
-import '../../controller/home_page_controller.dart';
-import '../../widgets/custom_button.dart';
-import '../../widgets/manrope.dart';
+import '../../../controller/home_page_controller.dart';
+import '../../../widgets/custom_button.dart';
+import '../../../widgets/manrope.dart';
 
 class InfoPeriod extends StatefulWidget {
   const InfoPeriod(
@@ -77,11 +77,13 @@ class _InfoPeriodState extends State<InfoPeriod> {
                     ),
                   ),
                   IconButton(
+                    iconSize: 30,
+                    alignment: Alignment.topRight,
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
                     icon: Icon(Icons.close),
-                    color: Colors.grey,
+                    color: Color.fromARGB(231, 217, 217, 217),
                   )
                 ],
               ),
@@ -231,7 +233,8 @@ class _InfoPeriodState extends State<InfoPeriod> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CustomButtonStandard(
-                    margin: const EdgeInsets.only(top: 30, bottom: 30, left: 10),
+                    margin:
+                        const EdgeInsets.only(top: 30, bottom: 30, left: 10),
                     height: 30,
                     width: 90,
                     onTap: widget.excluir,
@@ -241,7 +244,8 @@ class _InfoPeriodState extends State<InfoPeriod> {
                     isLoading: true,
                   ),
                   CustomButtonStandard(
-                    margin: const EdgeInsets.only(top: 30, bottom: 30, right: 10),
+                    margin:
+                        const EdgeInsets.only(top: 30, bottom: 30, right: 10),
                     height: 30,
                     width: 90,
                     onTap: widget.editar,
