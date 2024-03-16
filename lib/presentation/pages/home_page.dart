@@ -21,8 +21,6 @@ class NoteListScreen extends StatefulWidget {
 }
 
 class _NoteListScreenState extends State<NoteListScreen> {
-  HomePageController controller = HomePageController();
-
   @override
   void initState() {
     super.initState();
@@ -90,7 +88,8 @@ class _NoteListScreenState extends State<NoteListScreen> {
                         controller: controller,
                         onTap: () async {
                           controller.inicialize();
-                          AddNewPeriodClass().init(context: context, controller: controller);
+                          AddNewPeriodClass()
+                              .init(context: context, controller: controller);
                         },
                       ),
                       SizedBox(height: 20),

@@ -1,9 +1,24 @@
+import 'package:crud_flutter/domain/usecases/update_period.dart';
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
-import '../../data/database_helper.dart';
 import '../../domain/model/ period_model.dart';
+import '../../domain/usecases/delete_period.dart';
+import '../../domain/usecases/get_all_period.dart';
+import '../../domain/usecases/insert_period.dart';
 
 class HomePageController extends ChangeNotifier {
+  final GetAllPeriodUsecase getAllPeriodUsecase;
+  final DeletePeriodUsecase deletePeriodUsecase;
+  final InsertPeriodUsecase insertPeriodUsecase;
+  final UpdatePeriodUsecase updatePeriodUsecase;
+
+  HomePageController({
+    required this.getAllPeriodUsecase,
+    required this.deletePeriodUsecase,
+    required this.insertPeriodUsecase,
+    required this.updatePeriodUsecase,
+  });
+
   final TextEditingController titleController = TextEditingController();
   final TextEditingController meta1 = TextEditingController();
   final TextEditingController meta2 = TextEditingController();
@@ -48,38 +63,58 @@ class HomePageController extends ChangeNotifier {
   }
 
   insert(Period period) async {
-    final db = await DB.instance.database;
-    await db!.insert(tableName, period.toMap());
+      try {
+      await insertPeriodUsecase(period);
+    } catch (e) {
+      throw e.toString();
+    }
+    // final db = await DB.instance.database;
+    // await db!.insert(tableName, period.toMap());
     notifyListeners();
   }
 
   getAllNotes() async {
-    final db = await DB.instance.database;
-    final List<Map<String, dynamic>> maps = await db!.query(tableName);
-    periods = List.generate(maps.length, (i) {
-      return Period.fromMap(maps[i]);
-    });
+    try {
+      periods = await getAllPeriodUsecase();
+    } catch (e) {
+      throw e.toString();
+    }
+    // final db = await DB.instance.database;
+    // final List<Map<String, dynamic>> maps = await db!.query(tableName);
+    // periods = List.generate(maps.length, (i) {
+    //   return Period.fromMap(maps[i]);
+    // });
     notifyListeners();
   }
 
   update(Period period) async {
-    final db = await DB.instance.database;
-    db!.update(
-      tableName,
-      period.toMap(),
-      where: 'id = ?',
-      whereArgs: [period.id],
-    );
+    try {
+      await updatePeriodUsecase(period);
+    } catch (e) {
+      throw e.toString();
+    }
+    // final db = await DB.instance.database;
+    // db!.update(
+    //   tableName,
+    //   period.toMap(),
+    //   where: 'id = ?',
+    //   whereArgs: [period.id],
+    // );
     notifyListeners();
   }
 
   delete(int id) async {
-    final db = await DB.instance.database;
-    await db!.delete(
-      tableName,
-      where: 'id = ?',
-      whereArgs: [id],
-    );
+   try {
+      await deletePeriodUsecase(id);
+    } catch (e) {
+      throw e.toString();
+    }
+    // final db = await DB.instance.database;
+    // await db!.delete(
+    //   tableName,
+    //   where: 'id = ?',
+    //   whereArgs: [id],
+    // );
     notifyListeners();
   }
 }
