@@ -1,7 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api, prefer_const_constructors, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import '../widgets/custom_container.dart';
 import '../widgets/text_home_page.dart';
 import 'add/add_modal_class.dart';
@@ -16,6 +16,7 @@ import '../widgets/top_app.dart';
 class NoteListScreen extends StatefulWidget {
   const NoteListScreen({super.key});
 
+
   @override
   _NoteListScreenState createState() => _NoteListScreenState();
 }
@@ -24,12 +25,13 @@ class _NoteListScreenState extends State<NoteListScreen> {
   @override
   void initState() {
     super.initState();
-    final controller = Provider.of<HomePageController>(context, listen: false);
+    final controller = Modular.get<HomePageController>();
     controller.getAllNotes();
   }
 
   @override
   Widget build(BuildContext context) {
+      final controller = Modular.get<HomePageController>();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -49,9 +51,10 @@ class _NoteListScreenState extends State<NoteListScreen> {
         padding: const EdgeInsets.all(15.0),
         child: Column(
           children: [
-            Consumer<HomePageController>(
-              builder: (context, controller, child) {
-                return Expanded(
+            // Consumer<HomePageController>(
+            //   builder: (context, controller, child) {
+            //     return 
+                Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -65,14 +68,14 @@ class _NoteListScreenState extends State<NoteListScreen> {
                           shrinkWrap: true,
                           itemCount: controller.periods.length,
                           itemBuilder: (context, index) {
-                            final periods = controller.periods[index];
+                            final periods =  controller.periods[index];
                             return CustomListTile(
                               period: periods,
                               onTap: () async {
-                                controller.titleController.text = periods.title;
+                                 controller.titleController.text = periods.title;
                                 InfoNewPeriodClass().init(
                                   context: context,
-                                  controller: controller,
+                                  controller:  controller,
                                   period: periods,
                                 );
                               },
@@ -85,19 +88,19 @@ class _NoteListScreenState extends State<NoteListScreen> {
                       ),
                       SizedBox(height: 12),
                       AddNewPeriodButton(
-                        controller: controller,
+                        controller:  controller,
                         onTap: () async {
-                          controller.inicialize();
+                           controller.inicialize();
                           AddNewPeriodClass()
-                              .init(context: context, controller: controller);
+                              .init(context: context, controller:  controller);
                         },
                       ),
                       SizedBox(height: 20),
                     ],
                   ),
-                );
-              },
-            ),
+                ),
+            //   },
+            // ),
             CustomExit(),
           ],
         ),

@@ -1,4 +1,4 @@
-import 'package:crud_flutter/domain/usecases/update_period.dart';
+import 'package:crud_flutter/modules/domain/usecases/update_period.dart';
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 import '../../domain/model/ period_model.dart';

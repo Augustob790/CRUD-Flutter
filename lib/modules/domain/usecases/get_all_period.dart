@@ -1,4 +1,4 @@
-import 'package:crud_flutter/data/repositories/period_repository.dart';
+import 'package:crud_flutter/modules/data/repositories/period_repository.dart';
 import '../exception/period_exception.dart';
 import '../model/ period_model.dart';
 

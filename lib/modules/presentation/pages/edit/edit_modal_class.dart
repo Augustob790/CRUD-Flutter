@@ -1,6 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:crud_flutter/presentation/pages/edit/widget/edit_modal.dart';
+import 'package:crud_flutter/modules/presentation/pages/edit/widget/edit_modal.dart';
 import 'package:flutter/material.dart';
 
 import '../../../domain/model/ period_model.dart';

@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:crud_flutter/presentation/widgets/manrope.dart';
+import 'package:crud_flutter/modules/presentation/widgets/manrope.dart';
 import 'package:flutter/material.dart';
 
 import '../helpers/helpers.dart';
