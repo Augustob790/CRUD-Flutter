@@ -63,7 +63,7 @@ class HomePageController extends ChangeNotifier {
   }
 
   insert(Period period) async {
-      try {
+    try {
       await insertPeriodUsecase(period);
     } catch (e) {
       throw e.toString();
@@ -104,7 +104,7 @@ class HomePageController extends ChangeNotifier {
   }
 
   delete(int id) async {
-   try {
+    try {
       await deletePeriodUsecase(id);
     } catch (e) {
       throw e.toString();

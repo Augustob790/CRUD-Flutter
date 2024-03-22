@@ -11,22 +11,12 @@ import 'modules/presentation/pages/home_page.dart';
 class AppModule extends Module {
   @override
   void binds(Injector i) {
-    i.addLazySingleton((i) => PeriodRepositoryImpl());
-    i.addLazySingleton(
-        (i) => GetAllPeriodUsecaseImpl(repository: Modular.get()));
-    i.addLazySingleton(
-        (i) => DeletePeriodUsecaseImpl(repository: Modular.get()));
-    i.addLazySingleton(
-        (i) => InsertPeriodUsecaseImpl(repository: Modular.get()));
-    i.addLazySingleton(
-        (i) => UpdatePeriodUsecaseImpl(repository: Modular.get()));
-
-    i.add((i) => HomePageController(
-          getAllPeriodUsecase: i.get<GetAllPeriodUsecase>(),
-          deletePeriodUsecase: i.get<DeletePeriodUsecase>(),
-          insertPeriodUsecase: i.get<InsertPeriodUsecase>(),
-          updatePeriodUsecase: i.get<UpdatePeriodUsecase>(),
-        ));
+    i.addLazySingleton<PeriodRepository>(PeriodRepositoryImpl.new);
+    i.addLazySingleton<GetAllPeriodUsecase>(GetAllPeriodUsecaseImpl.new);
+    i.addLazySingleton<DeletePeriodUsecase>(DeletePeriodUsecaseImpl.new);
+    i.addLazySingleton<InsertPeriodUsecase>(InsertPeriodUsecaseImpl.new);
+    i.addLazySingleton<UpdatePeriodUsecase>(UpdatePeriodUsecaseImpl.new);
+    i.add(HomePageController.new);
   }
 
   @override

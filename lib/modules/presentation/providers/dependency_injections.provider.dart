@@ -33,14 +33,14 @@ class DependecyInjectionsProvider extends StatelessWidget {
           create: (context) => DeletePeriodUsecaseImpl(
               repository: context.read<PeriodRepository>()),
         ),
-        ChangeNotifierProvider(
-          create: (context) => HomePageController(
-            getAllPeriodUsecase: context.read<GetAllPeriodUsecase>(),
-            insertPeriodUsecase: context.read<InsertPeriodUsecase>(),
-            updatePeriodUsecase: context.read<UpdatePeriodUsecase>(),
-            deletePeriodUsecase: context.read<DeletePeriodUsecase>(),
-          ),
-        ),
+        // ChangeNotifierProvider(
+        //   create: (context) => HomePageController(
+        //     getAllPeriodUsecase: context.read<GetAllPeriodUsecase>(),
+        //     insertPeriodUsecase: context.read<InsertPeriodUsecase>(),
+        //     updatePeriodUsecase: context.read<UpdatePeriodUsecase>(),
+        //     deletePeriodUsecase: context.read<DeletePeriodUsecase>(),
+        //   ),
+        // ),
       ],
       child: child,
     );

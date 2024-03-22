@@ -1,5 +1,6 @@
 // ignore_for_file: library_private_types_in_public_api, prefer_const_constructors, use_build_context_synchronously
 
+import 'package:crud_flutter/modules/presentation/controller/home_page_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import '../widgets/custom_container.dart';
@@ -10,28 +11,26 @@ import '../widgets/add_new_period.dart';
 import '../widgets/custom_exit.dart';
 import '../widgets/custom_list_tile.dart';
 import '../widgets/manrope.dart';
-import '../controller/home_page_controller.dart';
 import '../widgets/top_app.dart';
 
 class NoteListScreen extends StatefulWidget {
   const NoteListScreen({super.key});
-
 
   @override
   _NoteListScreenState createState() => _NoteListScreenState();
 }
 
 class _NoteListScreenState extends State<NoteListScreen> {
+  final controller = Modular.get<HomePageController>();
+
   @override
   void initState() {
     super.initState();
-    final controller = Modular.get<HomePageController>();
     controller.getAllNotes();
   }
 
   @override
   Widget build(BuildContext context) {
-      final controller = Modular.get<HomePageController>();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -51,54 +50,54 @@ class _NoteListScreenState extends State<NoteListScreen> {
         padding: const EdgeInsets.all(15.0),
         child: Column(
           children: [
-            // Consumer<HomePageController>(
+            // Consumer<HomePagecontroller>(
             //   builder: (context, controller, child) {
-            //     return 
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      TopApp(),
-                      Divider(height: 40),
-                      TextHomePage(text: "Períodos"),
-                      CustomContainerHomePage(
-                        height: 330,
-                        child: ListView.separated(
-                          padding: const EdgeInsets.fromLTRB(5, 5, 5, 10),
-                          shrinkWrap: true,
-                          itemCount: controller.periods.length,
-                          itemBuilder: (context, index) {
-                            final periods =  controller.periods[index];
-                            return CustomListTile(
+            //     return
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TopApp(),
+                  Divider(height: 40),
+                  TextHomePage(text: "Períodos"),
+                  CustomContainerHomePage(
+                    height: 330,
+                    child: ListView.separated(
+                      padding: const EdgeInsets.fromLTRB(5, 5, 5, 10),
+                      shrinkWrap: true,
+                      itemCount: controller.periods.length,
+                      itemBuilder: (context, index) {
+                        final periods = controller.periods[index];
+                        return CustomListTile(
+                          period: periods,
+                          onTap: () async {
+                            controller.titleController.text = periods.title;
+                            InfoNewPeriodClass().init(
+                              context: context,
+                              controller: controller,
                               period: periods,
-                              onTap: () async {
-                                 controller.titleController.text = periods.title;
-                                InfoNewPeriodClass().init(
-                                  context: context,
-                                  controller:  controller,
-                                  period: periods,
-                                );
-                              },
                             );
                           },
-                          separatorBuilder: (BuildContext context, int index) {
-                            return SizedBox(height: 10);
-                          },
-                        ),
-                      ),
-                      SizedBox(height: 12),
-                      AddNewPeriodButton(
-                        controller:  controller,
-                        onTap: () async {
-                           controller.inicialize();
-                          AddNewPeriodClass()
-                              .init(context: context, controller:  controller);
-                        },
-                      ),
-                      SizedBox(height: 20),
-                    ],
+                        );
+                      },
+                      separatorBuilder: (BuildContext context, int index) {
+                        return SizedBox(height: 10);
+                      },
+                    ),
                   ),
-                ),
+                  SizedBox(height: 12),
+                  AddNewPeriodButton(
+                    controller: controller,
+                    onTap: () async {
+                      controller.inicialize();
+                      AddNewPeriodClass()
+                          .init(context: context, controller: controller);
+                    },
+                  ),
+                  SizedBox(height: 20),
+                ],
+              ),
+            ),
             //   },
             // ),
             CustomExit(),
