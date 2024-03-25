@@ -92,7 +92,7 @@ class _NoteListScreenState extends State<NoteListScreen> {
                               .init(context: context, controller: controller);
                         },
                       ),
-                      SizedBox(height: 20),
+                      SizedBox(height: 10),
                     ],
                   ),
                 );
