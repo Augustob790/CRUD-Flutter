@@ -2,8 +2,9 @@
 
 import 'package:crud_flutter/modules/presentation/pages/edit/widget/edit_modal.dart';
 import 'package:flutter/material.dart';
-
 import '../../../domain/model/ period_model.dart';
+import '../../bloc/flutter_bloc_period.dart';
+import '../../bloc/period_events.dart';
 import '../../controller/home_page_controller.dart';
 
 class EditNewPeriodClass {
@@ -11,6 +12,8 @@ class EditNewPeriodClass {
     required BuildContext context,
     required HomePageController controller,
     required int? id,
+    // required PeriodBloc bloc,
+    required PeriodFlutterBloc bloc,
   }) async {
     await showDialog(
       context: context,
@@ -22,8 +25,10 @@ class EditNewPeriodClass {
           content: EditNewPeriod(
               controller: controller,
               add: () async {
-                if (controller.titleController.text.isNotEmpty && controller.dropdownCategoryValue.isNotEmpty) {
-                  await controller.update(Period(
+                if (controller.titleController.text.isNotEmpty &&
+                    controller.dropdownCategoryValue.isNotEmpty) {
+                  bloc.add(UpdatePeriodEvents(
+                      period: Period(
                     id: id,
                     title: controller.titleController.text,
                     category: controller.dropdownCategoryValue,
@@ -31,9 +36,9 @@ class EditNewPeriodClass {
                     dateFinal: controller.dateFinal.toIso8601String(),
                     meta1: controller.meta1.text,
                     meta2: controller.meta2.text,
-                  ));
+                  )));
                 }
-                controller.getAllNotes();
+                bloc.add(LoadPeriodEvents());
                 Navigator.pop(context);
               }),
         );

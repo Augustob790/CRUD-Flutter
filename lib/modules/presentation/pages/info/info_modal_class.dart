@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import '../../../domain/model/ period_model.dart';
+import '../../bloc/flutter_bloc_period.dart';
+import '../../bloc/period_events.dart';
 import '../../controller/home_page_controller.dart';
 import '../edit/edit_modal_class.dart';
 import 'widget/info_modal.dart';
@@ -11,6 +13,8 @@ class InfoNewPeriodClass {
     required BuildContext context,
     required HomePageController controller,
     required Period period,
+    //required PeriodBloc bloc,
+    required PeriodFlutterBloc bloc,
   }) async {
     await showDialog(
       context: context,
@@ -27,8 +31,8 @@ class InfoNewPeriodClass {
               dateInit: period.dataInit,
               dateFinal: period.dateFinal,
               excluir: () async {
-                await controller.delete(period.id!);
-                controller.getAllNotes();
+                bloc.add(DeletePeriodEvents(id: period.id!));
+                bloc.add(LoadPeriodEvents());
                 Navigator.pop(context);
               },
               editar: () async {
@@ -39,7 +43,11 @@ class InfoNewPeriodClass {
                 controller.dateInit = DateTime.parse(period.dataInit);
                 controller.meta1.text = period.meta1;
                 controller.meta2.text = period.meta2;
-                EditNewPeriodClass().init(context: context, id: period.id, controller: controller);
+                EditNewPeriodClass().init(
+                    context: context,
+                    id: period.id,
+                    controller: controller,
+                    bloc: bloc);
               },
             ));
       },

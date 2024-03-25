@@ -68,22 +68,15 @@ class HomePageController extends ChangeNotifier {
     } catch (e) {
       throw e.toString();
     }
-    // final db = await DB.instance.database;
-    // await db!.insert(tableName, period.toMap());
     notifyListeners();
   }
 
-  getAllNotes() async {
+  getAllPeriods() async {
     try {
       periods = await getAllPeriodUsecase();
     } catch (e) {
       throw e.toString();
     }
-    // final db = await DB.instance.database;
-    // final List<Map<String, dynamic>> maps = await db!.query(tableName);
-    // periods = List.generate(maps.length, (i) {
-    //   return Period.fromMap(maps[i]);
-    // });
     notifyListeners();
   }
 
@@ -93,13 +86,6 @@ class HomePageController extends ChangeNotifier {
     } catch (e) {
       throw e.toString();
     }
-    // final db = await DB.instance.database;
-    // db!.update(
-    //   tableName,
-    //   period.toMap(),
-    //   where: 'id = ?',
-    //   whereArgs: [period.id],
-    // );
     notifyListeners();
   }
 
@@ -109,12 +95,6 @@ class HomePageController extends ChangeNotifier {
     } catch (e) {
       throw e.toString();
     }
-    // final db = await DB.instance.database;
-    // await db!.delete(
-    //   tableName,
-    //   where: 'id = ?',
-    //   whereArgs: [id],
-    // );
     notifyListeners();
   }
 }

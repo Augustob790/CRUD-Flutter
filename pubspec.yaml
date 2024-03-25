@@ -40,9 +40,7 @@ dependencies:
   table_calendar: ^3.0.8
   provider:
   flutter_modular: ^6.3.0
-
-
-
+  flutter_bloc: ^8.1.5
 
 
 dev_dependencies:

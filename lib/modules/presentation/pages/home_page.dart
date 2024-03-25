@@ -1,8 +1,11 @@
 // ignore_for_file: library_private_types_in_public_api, prefer_const_constructors, use_build_context_synchronously
-
+import 'package:crud_flutter/modules/presentation/bloc/period_events.dart';
+import 'package:crud_flutter/modules/presentation/bloc/period_states.dart';
 import 'package:crud_flutter/modules/presentation/controller/home_page_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import '../bloc/flutter_bloc_period.dart';
 import '../widgets/custom_container.dart';
 import '../widgets/text_home_page.dart';
 import 'add/add_modal_class.dart';
@@ -23,10 +26,20 @@ class NoteListScreen extends StatefulWidget {
 class _NoteListScreenState extends State<NoteListScreen> {
   final controller = Modular.get<HomePageController>();
 
+  late final PeriodFlutterBloc bloc;
+
   @override
   void initState() {
     super.initState();
-    controller.getAllNotes();
+    bloc = PeriodFlutterBloc();
+    bloc.add(LoadPeriodEvents());
+    controller.getAllPeriods();
+  }
+
+  @override
+  void dispose() {
+    bloc.close();
+    super.dispose();
   }
 
   @override
@@ -50,56 +63,61 @@ class _NoteListScreenState extends State<NoteListScreen> {
         padding: const EdgeInsets.all(15.0),
         child: Column(
           children: [
-            // Consumer<HomePagecontroller>(
-            //   builder: (context, controller, child) {
-            //     return
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  TopApp(),
-                  Divider(height: 40),
-                  TextHomePage(text: "Períodos"),
-                  CustomContainerHomePage(
-                    height: 330,
-                    child: ListView.separated(
-                      padding: const EdgeInsets.fromLTRB(5, 5, 5, 10),
-                      shrinkWrap: true,
-                      itemCount: controller.periods.length,
-                      itemBuilder: (context, index) {
-                        final periods = controller.periods[index];
-                        return CustomListTile(
-                          period: periods,
+            BlocBuilder<PeriodFlutterBloc, PeriodState>(
+                bloc: bloc,
+                builder: (context, state) {
+                  final periodsList = state.periods;
+                  return Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        TopApp(),
+                        Divider(height: 40),
+                        TextHomePage(text: "Períodos"),
+                        CustomContainerHomePage(
+                          height: 330,
+                          child: ListView.separated(
+                            padding: const EdgeInsets.fromLTRB(5, 5, 5, 10),
+                            shrinkWrap: true,
+                            itemCount: periodsList.length,
+                            itemBuilder: (context, index) {
+                              final periods = periodsList[index];
+                              return CustomListTile(
+                                period: periods,
+                                onTap: () async {
+                                  controller.titleController.text =
+                                      periods.title;
+                                  InfoNewPeriodClass().init(
+                                    context: context,
+                                    controller: controller,
+                                    period: periods,
+                                    bloc: bloc,
+                                  );
+                                },
+                              );
+                            },
+                            separatorBuilder:
+                                (BuildContext context, int index) {
+                              return SizedBox(height: 10);
+                            },
+                          ),
+                        ),
+                        SizedBox(height: 12),
+                        AddNewPeriodButton(
+                          controller: controller,
                           onTap: () async {
-                            controller.titleController.text = periods.title;
-                            InfoNewPeriodClass().init(
-                              context: context,
-                              controller: controller,
-                              period: periods,
-                            );
+                            controller.inicialize();
+                            AddNewPeriodClass().init(
+                                context: context,
+                                controller: controller,
+                                bloc: bloc);
                           },
-                        );
-                      },
-                      separatorBuilder: (BuildContext context, int index) {
-                        return SizedBox(height: 10);
-                      },
+                        ),
+                        SizedBox(height: 10),
+                      ],
                     ),
-                  ),
-                  SizedBox(height: 12),
-                  AddNewPeriodButton(
-                    controller: controller,
-                    onTap: () async {
-                      controller.inicialize();
-                      AddNewPeriodClass()
-                          .init(context: context, controller: controller);
-                    },
-                  ),
-                  SizedBox(height: 20),
-                ],
-              ),
-            ),
-            //   },
-            // ),
+                  );
+                }),
             CustomExit(),
           ],
         ),
